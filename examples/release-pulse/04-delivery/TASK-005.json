@@ -1,0 +1,150 @@
+{
+  "taskId": "TASK-005",
+  "title": "Scaffold Digest Worker (BackgroundWorker)",
+  "outcome": "\u0027Digest Worker\u0027 exists as a buildable skeleton, wired into the solution, with a working health check and no feature behaviour; its sub-tasks add the features.",
+  "status": "NotStarted",
+  "sequence": 17,
+  "parallelSafe": true,
+  "humanApprovalRequired": true,
+  "sourceRefs": [
+    {
+      "entityType": "BlueprintComponent",
+      "entityId": "d484a3f3a12a417fbbac3e723d1ca525",
+      "name": "Digest Worker"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "2e256e04822c45e682a8e122297a8f72",
+      "name": "Technology: C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "83bdfa6479364845ba31d373b5805387",
+      "name": "Technology: a SQLite-backed job table polled by the hosted background services"
+    }
+  ],
+  "baseline": {
+    "blueprintId": "d9b1b0a421764fffbbe5782ad0fd6286",
+    "blueprintVersion": 3,
+    "pinnedRepositoryLabel": "No existing-system baseline \u2014 greenfield project. Every target path below is Proposed, not discovered."
+  },
+  "dependsOn": [
+    "TASK-001",
+    "TASK-002",
+    "TASK-003",
+    "TASK-004"
+  ],
+  "unlocks": [
+    "TASK-005.1",
+    "TASK-005.2",
+    "TASK-005.3",
+    "TASK-008"
+  ],
+  "targetScope": [
+    {
+      "path": "(proposed) digestworker/",
+      "status": "Proposed",
+      "note": "No baseline exists for this path \u2014 treat it as a starting suggestion, not a fixed location."
+    }
+  ],
+  "allowedChanges": [
+    "Add the skeleton files within this task\u0027s target scope (digestworker/).",
+    "Add the build, wiring and health-check tests under tests/ for \u0027Digest Worker\u0027.",
+    "Update service registration in the composition root / dependency injection module."
+  ],
+  "prohibitedChanges": [
+    "Implementing feature or requirement behaviour: that belongs to the sub-tasks of this component.",
+    "Modifying another task\u0027s target scope without an explicit, recorded dependency.",
+    "Introducing an unapproved external package, dependency, or architecture style not recorded in the Solution Blueprint.",
+    "Mutating applied database migrations in place - always create a new migration for schema changes.",
+    "Committing hardcoded secrets, API keys, credentials, or environment-specific values.",
+    "Altering or circumventing locked user decisions and governance constraints.",
+    "Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Do not substitute, replace, or alter the locked decision for Technology (C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process).",
+    "Do not substitute, replace, or alter the locked decision for Technology (a SQLite-backed job table polled by the hosted background services).",
+    "Do not substitute, replace, or alter the locked decision for Technology (ASP.NET Core Web API with polling mechanism)."
+  ],
+  "currentStateEvidence": "Greenfield component per Solution Blueprint. Target responsibilities:\n\u2022 Run the digest worker as its own background process, separate from the API service and the other workers.\n\u2022 Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting.\n\u2022 Retry failed items with backoff and record failures in structured logs.",
+  "changeContract": "Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.",
+  "contractChanges": [
+    {
+      "contractType": "API",
+      "changeDescription": "Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule."
+    },
+    {
+      "contractType": "Data",
+      "changeDescription": "Reads/updates job state records in the primary datastore; ensures idempotent task execution."
+    }
+  ],
+  "implementationSteps": [
+    "Scaffold the component boundary for \u0027Digest Worker\u0027 (BackgroundWorker) within the target scope (digestworker/): the empty project or module structure only.",
+    "Wire \u0027Digest Worker\u0027 into the composition root following existing repository conventions.",
+    "Add a health signal the platform can probe (a heartbeat or health endpoint) that reports the worker loop has started; the loop itself may be empty.",
+    "Do not implement any feature behaviour: the sub-tasks of TASK-005 (TASK-nnn.m) deliver it, one unit of functionality each.",
+    "Run the build and the health check; fix only what stops the skeleton from building or starting."
+  ],
+  "qualityAndSecurity": [
+    "Standard authentication and role-based authorization at every trust boundary this task touches.",
+    "No secret or environment configuration hard-coded \u2014 route all credentials through the Secrets service.",
+    "Clean architecture boundaries: adhere to separation of concerns and dependency inversion.",
+    "Data handling and retention specification: Reads/updates job state records in the primary datastore; ensures idempotent task execution.",
+    "API contract and security requirements: Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.",
+    "Architecture decomposition boundary: Dedicated background processing decouples resource-intensive or long-running tasks from user-facing request latency budgets.",
+    "Data residency \u0026 lifecycle policy: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat\u2026",
+    "Sensitive data governance \u0026 tokenization: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat\u2026",
+    "Human oversight \u0026 approval requirements: The head of platform engineering is the Technical Decision Owner and also the Risk Owner who tracks and mitigates the risks, the main one being score distrust. Evidence published for each gate review is the architecture diagram, the test coverage report and the replay-test results, and the head of platform engineering approves the pilot and the full rollout and holds the veto. Exceptions and accep\u2026",
+    "Security \u0026 encryption standard: Users sign in with the company single sign-on (OpenID Connect through ASP.NET Core authentication) and get team-scoped role-based access with least privilege, and each webhook source is authenticated with its own shared secret that is rotated quarterly and rejected otherwise. All traffic uses TLS 1.3, the database file sits on an encrypted disk volume, and secrets live in the server\u0027s protected co\u2026"
+  ],
+  "tests": [
+    "The solution builds with the \u0027Digest Worker\u0027 skeleton in place.",
+    "Health check test: the health signal reports started once the worker loop runs.",
+    "Full regression test suite remains 100% green - this task must not regress another component."
+  ],
+  "commands": [
+    {
+      "executable": "dotnet",
+      "args": [
+        "build",
+        "--nologo"
+      ],
+      "purpose": "Build (dotnet)"
+    },
+    {
+      "executable": "dotnet",
+      "args": [
+        "test",
+        "--nologo"
+      ],
+      "purpose": "Test (dotnet)"
+    }
+  ],
+  "rollback": [
+    "git revert this task\u0027s commit(s) rather than editing history.",
+    "If a database migration was applied, roll it back before reverting code \u2014 never edit an already-applied migration in place."
+  ],
+  "definitionOfDone": [
+    "Done when \u0027Digest Worker\u0027 builds, is wired into the solution and its health check passes, with no feature behaviour added.",
+    "Every step in Implementation Steps is complete.",
+    "Every item in Tests passes.",
+    "The repository\u0027s standard build and test commands (see Commands) are green.",
+    "No unresolved \u0027to be decided\u0027 marker remains anywhere this task touched.",
+    "This task\u0027s checkpointUpdate has been applied to execution-state.json."
+  ],
+  "checkpointUpdate": {
+    "targetFile": "07-agent/execution-state.json",
+    "updatedFields": [
+      "tasks[].status",
+      "tasks[].completedAt",
+      "nextSafeAction"
+    ],
+    "strategy": "Set this task\u0027s status to \u0027completed\u0027 and record completedAt, then recompute nextSafeAction as the first remaining not_started task whose dependsOn are all completed."
+  },
+  "escalateIf": [
+    "Completing this task\u0027s Outcome would require an architecture, data-model, or public-contract choice not already recorded in the Solution Blueprint \u2014 stop and ask a human rather than deciding it yourself.",
+    "A required credential, access grant, or environment value is missing.",
+    "The repository\u0027s actual current state no longer matches this task\u0027s pinned baseline (see START_HERE.md\u0027s baseline-drift reconciliation guidance).",
+    "A required human approval workflow or sign-off checkpoint is absent or bypassed.",
+    "Data residency or geographic isolation boundaries would be violated."
+  ]
+}

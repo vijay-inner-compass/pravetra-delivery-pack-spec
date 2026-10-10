@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Data Model &amp; Entity Dictionary</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Domain Data Model &amp; Entity Dictionary</h1>
+    <p>This document specifies the **Domain Data Model, Entity Boundaries, and Schema Requirements** for **E02-release-pulse**. It provides the persistence models, aggregate roots, relationships, and data governance rules required for autonomous coding agents implementing **TASK-001 (Primary Database / Persistence)** and component domain services across **Domain-Driven Design (DDD)**, **Scrum Data Modeling**, **SAFe Architecture Enablers**, and **Enterprise Database Engineering**.</p>
+    <h2>1. Architecture &amp; Persistence Context</h2>
+    <table>
+      <tr>
+        <th>Architecture Attribute</th>
+        <th>Specification</th>
+      </tr>
+      <tr>
+        <td>Architecture Style</td>
+        <td>Modular Monolith with Selected Extracted Services</td>
+      </tr>
+      <tr>
+        <td>Decomposition Structure</td>
+        <td>Hybrid</td>
+      </tr>
+      <tr>
+        <td>Target Schema Version</td>
+        <td>v3</td>
+      </tr>
+    </table>
+    <h3>Decided Persistence Stack</h3>
+    <ul><li>**Technology**: a SQLite-backed job table polled by the hosted background services (rejected alternatives, do not use: an in-process channel (System.Threading.Channels) inside the API host (events queued in memory are lost when the host restarts); a spool folder of JSON files read by the workers (no transactions; a crash can lose or double-process an event)). Rationale: Database and background-work queue. SQLite is the mandated database. A job table written in the same transaction as the event makes the at-least-once, scored-once requirement testable, with no broker to run. Write-ahead mode lets the API read while a worker writes.</li></ul>
+    <h2>2. Component Entity &amp; Schema Specifications</h2>
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Kind</th>
+        <th>Responsibilities</th>
+        <th>Data Design &amp; Entities</th>
+      </tr>
+      <tr>
+        <td>Digest Worker</td>
+        <td>BackgroundWorker</td>
+        <td>• Run the digest worker as its own background process, separate from the API service and the other workers. • Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting. • Retry failed items with backoff and record failures in structured logs.</td>
+        <td>Reads/updates job state records in the primary datastore; ensures idempotent task execution.</td>
+      </tr>
+      <tr>
+        <td>Ingest Worker</td>
+        <td>BackgroundWorker</td>
+        <td>• Run the ingest worker as its own background process, separate from the API service and the other workers. • Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting. • Retry failed items with backoff and record failures in structured logs.</td>
+        <td>Reads/updates job state records in the primary datastore; ensures idempotent task execution.</td>
+      </tr>
+      <tr>
+        <td>Scoring Worker</td>
+        <td>BackgroundWorker</td>
+        <td>• Run the scoring worker as its own background process, separate from the API service and the other workers. • Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting. • Retry failed items with backoff and record failures in structured logs.</td>
+        <td>Reads/updates job state records in the primary datastore; ensures idempotent task execution.</td>
+      </tr>
+      <tr>
+        <td>Web Client</td>
+        <td>ClientApp</td>
+        <td>• Provide responsive and accessible user interface for solution workflows. • Coordinate client-side state management, route transitions, and input validation. • Manage authentication sessions and handle operational error display.</td>
+        <td>Client-side reactive state managed in memory and browser storage (session tokens, preferences); no direct database access. Data sensitivity &amp; client-side boundary: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat….</td>
+      </tr>
+      <tr>
+        <td>Primary Database</td>
+        <td>DataStore</td>
+        <td>• Provide durable, ACID-compliant persistence for all domain entities and audit events. • Enforce relational integrity, foreign key constraints, and unique indexes. • Support point-in-time recovery and snapshot durability.</td>
+        <td>Relational database schema with versioned schema migrations. Indexed primary and foreign keys; created_at/updated_at audit columns on all primary tables. Technology decided for this component: SQLite (a technology decision, not a component of its own). Data lifecycle and residency policy: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat….</td>
+      </tr>
+      <tr>
+        <td>API / Backend Service</td>
+        <td>DeployableUnit</td>
+        <td>• Expose secure RESTful API endpoints for client and external consumers. • Enforce authentication, role-based authorization, and rate limiting. • Coordinate transactional unit-of-work across domain modules. • Emit structured audit logs and operational telemetry.</td>
+        <td>Coordinates database transactions across modules; manages connection lifetimes and migration application.</td>
+      </tr>
+      <tr>
+        <td>Data Quality</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.; Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.; Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+      <tr>
+        <td>Release Health Analytics</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.; Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.; Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+    </table>
+    <h2>3. Entity Details &amp; Data Governance Notes</h2>
+    <h3>Digest Worker (BackgroundWorker)</h3>
+    <ul><li>**Domain Responsibilities**: • Run the digest worker as its own background process, separate from the API service and the other workers.</li></ul>
+    <p>• Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting.</p>
+    <p>• Retry failed items with backoff and record failures in structured logs.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Reads/updates job state records in the primary datastore; ensures idempotent task execution.</li></ul>
+    <ul><li>**API &amp; Query Interface**: Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.</li></ul>
+    <ul><li>**Boundary Rationale**: Dedicated background processing decouples resource-intensive or long-running tasks from user-facing request latency budgets.</li></ul>
+    <h3>Ingest Worker (BackgroundWorker)</h3>
+    <ul><li>**Domain Responsibilities**: • Run the ingest worker as its own background process, separate from the API service and the other workers.</li></ul>
+    <p>• Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting.</p>
+    <p>• Retry failed items with backoff and record failures in structured logs.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Reads/updates job state records in the primary datastore; ensures idempotent task execution.</li></ul>
+    <ul><li>**API &amp; Query Interface**: Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.</li></ul>
+    <ul><li>**Boundary Rationale**: Dedicated background processing decouples resource-intensive or long-running tasks from user-facing request latency budgets.</li></ul>
+    <h3>Scoring Worker (BackgroundWorker)</h3>
+    <ul><li>**Domain Responsibilities**: • Run the scoring worker as its own background process, separate from the API service and the other workers.</li></ul>
+    <p>• Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting.</p>
+    <p>• Retry failed items with backoff and record failures in structured logs.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Reads/updates job state records in the primary datastore; ensures idempotent task execution.</li></ul>
+    <ul><li>**API &amp; Query Interface**: Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.</li></ul>
+    <ul><li>**Boundary Rationale**: Dedicated background processing decouples resource-intensive or long-running tasks from user-facing request latency budgets.</li></ul>
+    <h3>Web Client (ClientApp)</h3>
+    <ul><li>**Domain Responsibilities**: • Provide responsive and accessible user interface for solution workflows.</li></ul>
+    <p>• Coordinate client-side state management, route transitions, and input validation.</p>
+    <p>• Manage authentication sessions and handle operational error display.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Client-side reactive state managed in memory and browser storage (session tokens, preferences); no direct database access. Data sensitivity &amp; client-side boundary: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat….</li></ul>
+    <ul><li>**API &amp; Query Interface**: Consumes HTTPS REST/JSON endpoints with token-based authorization. Handles RFC 7807 problem details and client-side error states.</li></ul>
+    <ul><li>**Boundary Rationale**: Dedicated client presentation boundary decoupled from backend application logic to support independent UI updates and client-specific performance optimization.</li></ul>
+    <h3>Primary Database (DataStore)</h3>
+    <ul><li>**Domain Responsibilities**: • Provide durable, ACID-compliant persistence for all domain entities and audit events.</li></ul>
+    <p>• Enforce relational integrity, foreign key constraints, and unique indexes.</p>
+    <p>• Support point-in-time recovery and snapshot durability.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Relational database schema with versioned schema migrations. Indexed primary and foreign keys; created_at/updated_at audit columns on all primary tables. Technology decided for this component: SQLite (a technology decision, not a component of its own). Data lifecycle and residency policy: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat….</li></ul>
+    <ul><li>**API &amp; Query Interface**: Database access through the chosen data-access layer with connection pooling, command timeouts, and retry-on-failure strategies.</li></ul>
+    <ul><li>**Boundary Rationale**: Centralized relational database ensures ACID transaction guarantees and cross-module relational consistency without complex distributed transactions.</li></ul>
+    <h3>API / Backend Service (DeployableUnit)</h3>
+    <ul><li>**Domain Responsibilities**: • Expose secure RESTful API endpoints for client and external consumers.</li></ul>
+    <p>• Enforce authentication, role-based authorization, and rate limiting.</p>
+    <p>• Coordinate transactional unit-of-work across domain modules.</p>
+    <p>• Emit structured audit logs and operational telemetry.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Coordinates database transactions across modules; manages connection lifetimes and migration application.</li></ul>
+    <ul><li>**API &amp; Query Interface**: HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error.</li></ul>
+    <ul><li>**Boundary Rationale**: Core deployable boundary hosting API surface and domain logic as a cohesive Hybrid unit, balancing maintainability and deployment simplicity.</li></ul>
+    <h3>Data Quality (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.; Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.; Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h3>Release Health Analytics (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.; Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.; Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h2>4. Coding Agent Implementation Rules for TASK-001 (Database &amp; Persistence)</h2>
+    <p>When implementing database schema, migrations, and entities:</p>
+    <p>1. **Strict Boundary Conformance**: Implement only the tables, aggregates, and fields required by the domain specifications above and referenced requirements. Do not invent unapproved tables or bypass entity ownership boundaries.</p>
+    <p>2. **Auditability &amp; Temporal Tracking**: Every primary persistence entity must include audit tracking fields (`CreatedAt`, `UpdatedAt`) and strong unique identifier keys (e.g. UUID/GUID or identity keys).</p>
+    <p>3. **Referential Integrity &amp; Cascades**: Foreign keys must have explicit delete behaviors (avoid inadvertent cascading deletions on primary aggregates; use soft deletes or fail-closed foreign key checks where appropriate).</p>
+    <p>4. **Zero-Migration Loss**: Migrations must be additive, forward-compatible, and idempotent. Never mutate applied migrations in place.</p>
+    <p>5. **Data Protection &amp; Classification**: Ensure restricted data, credentials, and PII are marked for encryption at rest and never logged in plain text.</p>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

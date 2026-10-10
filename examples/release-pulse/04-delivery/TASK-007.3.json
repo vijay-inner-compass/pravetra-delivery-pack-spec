@@ -1,0 +1,167 @@
+{
+  "taskId": "TASK-007.3",
+  "parentTaskId": "TASK-007",
+  "title": "Retry failed items",
+  "outcome": "\u0027Scoring Worker\u0027 delivers one of its recorded responsibilities: Retry failed items with backoff and record failures in structured logs Done when it is satisfied and the tests pass. This sub-task is derived from the component\u0027s recorded responsibility, not from a requirement.",
+  "status": "NotStarted",
+  "sequence": 26,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "sourceRefs": [
+    {
+      "entityType": "BlueprintComponent",
+      "entityId": "13d1dd3ca85b4f21ab6ba834f8c7b8e5",
+      "name": "Scoring Worker"
+    },
+    {
+      "entityType": "ComponentResponsibility",
+      "entityId": "13d1dd3ca85b4f21ab6ba834f8c7b8e5#3",
+      "name": "Responsibility 3 of 3: Retry failed items with backoff and record failures in structured logs"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "2e256e04822c45e682a8e122297a8f72",
+      "name": "Technology: C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "83bdfa6479364845ba31d373b5805387",
+      "name": "Technology: a SQLite-backed job table polled by the hosted background services"
+    }
+  ],
+  "baseline": {
+    "blueprintId": "d9b1b0a421764fffbbe5782ad0fd6286",
+    "blueprintVersion": 3,
+    "pinnedRepositoryLabel": "No existing-system baseline \u2014 greenfield project. Every target path below is Proposed, not discovered."
+  },
+  "dependsOn": [
+    "TASK-007"
+  ],
+  "unlocks": [],
+  "targetScope": [
+    {
+      "path": "(proposed) scoringworker/",
+      "status": "Proposed",
+      "note": "No baseline exists for this path \u2014 treat it as a starting suggestion, not a fixed location."
+    }
+  ],
+  "allowedChanges": [
+    "Add, modify, or remove files within this task\u0027s target scope (scoringworker/) that this responsibility needs.",
+    "Add unit and integration tests under tests/ for this responsibility of \u0027Scoring Worker\u0027.",
+    "Update service registration in the composition root / dependency injection module where the behaviour needs it."
+  ],
+  "prohibitedChanges": [
+    "Implementing a responsibility or requirement that belongs to another sub-task of TASK-007 or to another component\u0027s task.",
+    "Modifying another task\u0027s target scope without an explicit, recorded dependency.",
+    "Introducing an unapproved external package, dependency, or architecture style not recorded in the Solution Blueprint.",
+    "Mutating applied database migrations in place - always create a new migration for schema changes.",
+    "Committing hardcoded secrets, API keys, credentials, or environment-specific values.",
+    "Altering or circumventing locked user decisions and governance constraints.",
+    "Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Do not substitute, replace, or alter the locked decision for Technology (C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process).",
+    "Do not substitute, replace, or alter the locked decision for Technology (a SQLite-backed job table polled by the hosted background services).",
+    "Do not substitute, replace, or alter the locked decision for Technology (ASP.NET Core Web API with polling mechanism).",
+    "Out of scope (build nothing of): the other sub-tasks of this component - TASK-007.1 (Run the scoring worker as own background process); TASK-007.2 (Take work).",
+    "Out of scope (build nothing of): the responsibilities of the other components - Primary Database, API / Backend Service, Data Quality, Release Health Analytics, Digest Worker, Ingest Worker, Web Client."
+  ],
+  "currentStateEvidence": "Builds on the skeleton of \u0027Scoring Worker\u0027 delivered by TASK-007. Greenfield component per Solution Blueprint. Target responsibilities:\n\u2022 Run the scoring worker as its own background process, separate from the API service and the other workers.\n\u2022 Take its work from the durable queue or schedule recorded in the technology and data decisions, and process each item at least once without double-counting.\n\u2022 Retry failed items with backoff and record failures in structured logs.",
+  "changeContract": "Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.",
+  "contractChanges": [],
+  "implementationSteps": [
+    "Write the failing tests listed under \u0027Write first\u0027 in Tests and run them to see them fail.",
+    "Confirm the skeleton from TASK-007 builds and its health check passes.",
+    "Responsibility-derived: no requirement was assigned to \u0027Scoring Worker\u0027, so this sub-task is built from responsibility 3 of 3 recorded for it in the Solution Blueprint; add or trace requirements to this component to replace it with requirement-backed sub-tasks.",
+    "Implement responsibility: Retry failed items with backoff and record failures in structured logs",
+    "Align the component interface with its contract: Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.",
+    "Keep to the component\u0027s data design: Reads/updates job state records in the primary datastore; ensures idempotent task execution.",
+    "Run the new tests and the commands listed; every \u0027Write first\u0027 test must now pass.",
+    "Report: update the checkpoint (execution-state.json) naming the tests that prove each \u0027Done when\u0027 item, then stop."
+  ],
+  "qualityAndSecurity": [
+    "Standard authentication and role-based authorization at every trust boundary this task touches.",
+    "No secret or environment configuration hard-coded \u2014 route all credentials through the Secrets service.",
+    "Clean architecture boundaries: adhere to separation of concerns and dependency inversion.",
+    "Data handling and retention specification: Reads/updates job state records in the primary datastore; ensures idempotent task execution.",
+    "API contract and security requirements: Internal job execution contract (a worker interface in the language of the chosen stack). Triggered via an in-process queue or timer schedule.",
+    "Architecture decomposition boundary: Dedicated background processing decouples resource-intensive or long-running tasks from user-facing request latency budgets.",
+    "Data residency \u0026 lifecycle policy: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat\u2026",
+    "Sensitive data governance \u0026 tokenization: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat\u2026",
+    "Human oversight \u0026 approval requirements: The head of platform engineering is the Technical Decision Owner and also the Risk Owner who tracks and mitigates the risks, the main one being score distrust. Evidence published for each gate review is the architecture diagram, the test coverage report and the replay-test results, and the head of platform engineering approves the pilot and the full rollout and holds the veto. Exceptions and accep\u2026",
+    "Security \u0026 encryption standard: Users sign in with the company single sign-on (OpenID Connect through ASP.NET Core authentication) and get team-scoped role-based access with least privilege, and each webhook source is authenticated with its own shared secret that is rotated quarterly and rejected otherwise. All traffic uses TLS 1.3, the database file sits on an encrypted disk volume, and secrets live in the server\u0027s protected co\u2026",
+    "Responsibility-derived: no requirement was assigned to \u0027Scoring Worker\u0027, so this sub-task is built from responsibility 3 of 3 recorded for it in the Solution Blueprint; add or trace requirements to this component to replace it with requirement-backed sub-tasks.",
+    "Applicable technology decision [2e256e04822c45e682a8e122297a8f72] Technology: C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process",
+    "Applicable technology decision [83bdfa6479364845ba31d373b5805387] Technology: a SQLite-backed job table polled by the hosted background services",
+    "Applicable technology decision [ce1b21ededfb41c2b326791ecc0ae64b] Technology: ASP.NET Core Web API with polling mechanism",
+    "Governance constraint (data residency): do not do the following - Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Governance constraint (human approval): do not do the following - Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Must not contradict: Technology: C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process | Technology: a SQLite-backed job table polled by the hosted background services | Technology: ASP.NET Core Web API with polling mechanism",
+    "Non-functional target (Ensure the application is available during working hours,...): Ensure the application is available during working hours, with monitoring in place to detect and alert on any downtime.",
+    "Non-functional target (Process incoming webhook events with a latency of no more...): Process incoming webhook events with a latency of no more than 2 seconds for 95% of events, ensuring timely updates to release health scores.",
+    "Non-functional target (Implement data encryption in transit and at rest to prote...): Implement data encryption in transit and at rest to protect sensitive incident data, ensuring compliance with internal security policies.",
+    "Non-functional target (Maintain an audit log of all actions taken within the app...): Maintain an audit log of all actions taken within the application, including data ingestion, scoring calculations, and user access, retaining logs for a minimum of 24 months.",
+    "Non-functional target (Ensure the application is scalable to handle increased da...): Ensure the application is scalable to handle increased data volumes as the number of deploys and incidents grows, with a target of supporting at least 1000 events per hour.",
+    "Non-functional target (Ensure the application complies with internal data protec...): Ensure the application complies with internal data protection policies, including data retention and access controls.",
+    "Non-functional target (Ensure the application is maintainable, allowing for upda...): Ensure the application is maintainable, allowing for updates and modifications without significant downtime or disruption to service."
+  ],
+  "tests": [
+    "Write first (must fail before the implementation) - positive case: Retry failed items with backoff and record failures in structured logs",
+    "Write first (must fail before the implementation) - negative case: invalid, unauthorised or malformed input for this behaviour is rejected with a clear error.",
+    "Negative scenario: Verify unauthorized request rejection across component trust boundaries.",
+    "Boundary condition: Verify boundary thresholds, empty collections, and null state handling.",
+    "Full regression test suite remains 100% green - this task must not regress another component."
+  ],
+  "commands": [
+    {
+      "executable": "dotnet",
+      "args": [
+        "build",
+        "--nologo"
+      ],
+      "purpose": "Build (dotnet)"
+    },
+    {
+      "executable": "dotnet",
+      "args": [
+        "test",
+        "--nologo"
+      ],
+      "purpose": "Test (dotnet)"
+    }
+  ],
+  "rollback": [
+    "git revert this task\u0027s commit(s) rather than editing history.",
+    "If a database migration was applied, roll it back before reverting code \u2014 never edit an already-applied migration in place."
+  ],
+  "definitionOfDone": [
+    "Done when: \u0027Scoring Worker\u0027 satisfies this recorded responsibility - Retry failed items with backoff and record failures in structured logs - shown by passing automated tests that name it.",
+    "Every step in Implementation Steps is complete.",
+    "Every item in Tests passes.",
+    "The repository\u0027s standard build and test commands (see Commands) are green.",
+    "No unresolved \u0027to be decided\u0027 marker remains anywhere this task touched.",
+    "This task\u0027s checkpointUpdate has been applied to execution-state.json."
+  ],
+  "reviewerChecklist": [
+    "Every \u0027Done when\u0027 item is met (1 listed in Definition of Done), each shown by a named test or check.",
+    "Every test listed under \u0027Write first\u0027 in Tests exists, failed before the change, and passes now.",
+    "The applicable decisions and constraints in Quality and Security are respected and nothing contradicts them.",
+    "The out-of-scope items in Prohibited Changes are untouched.",
+    "No unrelated changes: the diff stays inside the allowed paths and only this sub-task\u0027s behaviour changed."
+  ],
+  "checkpointUpdate": {
+    "targetFile": "07-agent/execution-state.json",
+    "updatedFields": [
+      "tasks[].status",
+      "tasks[].completedAt",
+      "nextSafeAction"
+    ],
+    "strategy": "Set this task\u0027s status to \u0027completed\u0027 and record completedAt, then recompute nextSafeAction as the first remaining not_started task whose dependsOn are all completed."
+  },
+  "escalateIf": [
+    "Completing this task\u0027s Outcome would require an architecture, data-model, or public-contract choice not already recorded in the Solution Blueprint \u2014 stop and ask a human rather than deciding it yourself.",
+    "A required credential, access grant, or environment value is missing.",
+    "The repository\u0027s actual current state no longer matches this task\u0027s pinned baseline (see START_HERE.md\u0027s baseline-drift reconciliation guidance).",
+    "A required human approval workflow or sign-off checkpoint is absent or bypassed.",
+    "Data residency or geographic isolation boundaries would be violated."
+  ]
+}

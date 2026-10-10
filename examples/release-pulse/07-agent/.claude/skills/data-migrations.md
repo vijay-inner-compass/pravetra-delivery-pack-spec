@@ -1,0 +1,8 @@
+# Data & Migrations
+
+> Canonical policy version: blueprint-v3-tasks-29-4d68dc68
+> Generated: 2026-10-09 10:53:27Z
+> Project: E02-release-pulse
+Complete — 1 data store(s) recorded in the catalog. Governed by AIGuard data lifecycle & protection: dataFoundations: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat…; dataLifecycle: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat…; dataQualityAndSensitivity: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat….
+
+A schema migration is always a new, versioned file — never edit an already-applied migration in place.

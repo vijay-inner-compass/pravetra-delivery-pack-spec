@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Requirements &amp; Backlog Specification</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Requirements &amp; Backlog Specification</h1>
+    <p>This document provides the canonical requirements catalog and agile product backlog for **E02-release-pulse**. It is structured to support **Scrum** (Product Backlog Items &amp; User Stories with Acceptance Criteria), **Agile** delivery increments, **SAFe** (Capabilities, Enablers, &amp; Non-Functional Requirements), and **Classic SDLC** functional specifications.</p>
+    <h2>Backlog Summary</h2>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Count</th>
+      </tr>
+      <tr>
+        <td>Total Requirements / Backlog Items</td>
+        <td>19</td>
+      </tr>
+      <tr>
+        <td>Functional Stories</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>Non-Functional Requirements (NFR Enablers)</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Business Outcomes &amp; Strategic Capabilities</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Approved (Critical-Approved)</td>
+        <td>15</td>
+      </tr>
+    </table>
+    <h2>Backlog Items &amp; User Stories</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Kind</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Statement / User Story</th>
+      </tr>
+      <tr>
+        <td>00f52ca816844867a220966345cafd80</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Normalize incoming deploy and incident data to ensure consistency across all teams, applying defined rules for scoring release health.</td>
+      </tr>
+      <tr>
+        <td>2b638c9e324b495f84bb8714f76fe780</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Allow engineering managers to compare release health scores across different teams within the user interface.</td>
+      </tr>
+      <tr>
+        <td>2eca054fe34f4ad584937aea7c1a9866</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Ensure the application is available during working hours, with monitoring in place to detect and alert on any downtime.</td>
+      </tr>
+      <tr>
+        <td>2fcd7ec65f6a4cb28ef9a40a28ff8d46</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Compile a summary of release health for each team and email it to all engineering managers every Monday morning, ensuring timely delivery of insights.</td>
+      </tr>
+      <tr>
+        <td>37ed6bf597464b599563fc99f1825321</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Calculate a release-health score based on defined rules, updating the score in real-time as new deploy and incident data is ingested.</td>
+      </tr>
+      <tr>
+        <td>3e41175eaba94213a505f4c6073645ba</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Implement role-based access control for engineering managers and on-call engineers to ensure appropriate permissions for viewing release health data.</td>
+      </tr>
+      <tr>
+        <td>59d872e8dab444feb45c9f12d386d799</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Maintain an audit log of all actions taken within the application, including data ingestion, scoring calculations, and user access, retaining logs for a minimum of 24 months.</td>
+      </tr>
+      <tr>
+        <td>725c4985365440e884e68f95215b107f</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy.</td>
+      </tr>
+      <tr>
+        <td>850039fc5e104f4a84ab4c895efd1f1d</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.</td>
+      </tr>
+      <tr>
+        <td>85c814013bfe4b899485df402472c101</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.</td>
+      </tr>
+      <tr>
+        <td>8916a436132848c6aaec6e20e5a26d38</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Implement data encryption in transit and at rest to protect sensitive incident data, ensuring compliance with internal security policies.</td>
+      </tr>
+      <tr>
+        <td>b31f0c1104d84dc9a80b5ec4cf3862ca</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Ensure that the application provides insights into the release health of each service, allowing for comparisons across teams.</td>
+      </tr>
+      <tr>
+        <td>e46498dc4d434e5b82e95f2c31367e23</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Process incoming webhook events with a latency of no more than 2 seconds for 95% of events, ensuring timely updates to release health scores.</td>
+      </tr>
+      <tr>
+        <td>f4dc4a536bc7489098645b6bfaf808ce</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Ensure the application complies with internal data protection policies, including data retention and access controls.</td>
+      </tr>
+      <tr>
+        <td>f57a03398d804606b4e7f73b8aa3168c</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>Critical-Approved</td>
+        <td>Integrate with the incident tracking tool to receive incident events in real-time via webhooks, capturing service name, timestamp, severity, and other relevant details.</td>
+      </tr>
+      <tr>
+        <td>7d359f771a0445d1a0924e2254f53a1d</td>
+        <td>nonfunctional</td>
+        <td>Should</td>
+        <td>draft</td>
+        <td>Ensure the application is maintainable, allowing for updates and modifications without significant downtime or disruption to service.</td>
+      </tr>
+      <tr>
+        <td>c91171a8fd7e40519e727ee8ddbd1be6</td>
+        <td>functional</td>
+        <td>Should</td>
+        <td>draft</td>
+        <td>Provide notifications to on-call engineers when a deploy event is associated with a high-severity incident, ensuring they are informed of potential issues.</td>
+      </tr>
+      <tr>
+        <td>d58e490dbc754eeab1f184b800c8c958</td>
+        <td>nonfunctional</td>
+        <td>Should</td>
+        <td>draft</td>
+        <td>Ensure the application is scalable to handle increased data volumes as the number of deploys and incidents grows, with a target of supporting at least 1000 events per hour.</td>
+      </tr>
+      <tr>
+        <td>f847540ed4804e598adf973e27c7ba4e</td>
+        <td>functional</td>
+        <td>Should</td>
+        <td>draft</td>
+        <td>Provide a user interface that allows engineering managers to view the release health summary and drill down into specific incidents and deploy events.</td>
+      </tr>
+    </table>
+    <p>---</p>
+    <h2>Item Details &amp; Acceptance Criteria</h2>
+    <h3>00f52ca816844867a220966345cafd80: Normalize incoming deploy and incident data to ensure consistency across all teams, applying defined rules for scoring release health.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Normalize incoming deploy and incident data to ensure consistency across all teams, applying defined rules for scoring release health.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>2b638c9e324b495f84bb8714f76fe780: Allow engineering managers to compare release health scores across different teams within the user interface.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Allow engineering managers to compare release health scores across different teams within the user interface.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>2eca054fe34f4ad584937aea7c1a9866: Ensure the application is available during working hours, with monitoring in place to detect and alert on any downtime.</h3>
+    <ul><li>**Kind**: nonfunctional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: Ensure the application has an availability target of 99.9%, with monitoring in place to detect and alert on any downtime.</p>
+    <h3>2fcd7ec65f6a4cb28ef9a40a28ff8d46: Compile a summary of release health for each team and email it to all engineering managers every Monday morning, ensuring timely delivery of insights.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Compile a summary of release health for each team and email it to all engineering managers every Monday morning, ensuring timely delivery of insights.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>37ed6bf597464b599563fc99f1825321: Calculate a release-health score based on defined rules, updating the score in real-time as new deploy and incident data is ingested.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Calculate a release-health score based on defined rules, updating the score in real-time as new deploy and incident data is ingested.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>3e41175eaba94213a505f4c6073645ba: Implement role-based access control for engineering managers and on-call engineers to ensure appropriate permissions for viewing release health data.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Implement role-based access control for engineering managers and on-call engineers to ensure appropriate permissions for viewing release health data.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>59d872e8dab444feb45c9f12d386d799: Maintain an audit log of all actions taken within the application, including data ingestion, scoring calculations, and user access, retaining logs for a minimum of 24 months.</h3>
+    <ul><li>**Kind**: nonfunctional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: Maintain an audit log of all actions taken within the application, including data ingestion, scoring calculations, and user access, retaining logs for a minimum of 24 months.</p>
+    <h3>725c4985365440e884e68f95215b107f: Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>850039fc5e104f4a84ab4c895efd1f1d: Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.</h3>
+    <ul><li>**Kind**: business | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the solution is in use, when the people it is built for carry out the work this requirement describes, then the stated outcome is observed and recorded: Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.</p>
+    <h3>85c814013bfe4b899485df402472c101: Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.</h3>
+    <ul><li>**Kind**: business | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the solution is in use, when the people it is built for carry out the work this requirement describes, then the stated outcome is observed and recorded: Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.</p>
+    <h3>8916a436132848c6aaec6e20e5a26d38: Implement data encryption in transit and at rest to protect sensitive incident data, ensuring compliance with internal security policies.</h3>
+    <ul><li>**Kind**: nonfunctional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: Implement data encryption in transit and at rest to protect sensitive incident data, ensuring compliance with internal security policies.</p>
+    <h3>b31f0c1104d84dc9a80b5ec4cf3862ca: Ensure that the application provides insights into the release health of each service, allowing for comparisons across teams.</h3>
+    <ul><li>**Kind**: business | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the solution is in use, when the people it is built for carry out the work this requirement describes, then the stated outcome is observed and recorded: Ensure that the application provides insights into the release health of each service, allowing for comparisons across teams.</p>
+    <h3>e46498dc4d434e5b82e95f2c31367e23: Process incoming webhook events with a latency of no more than 2 seconds for 95% of events, ensuring timely updates to release health scores.</h3>
+    <ul><li>**Kind**: nonfunctional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: Process incoming webhook events with a latency of no more than 2 seconds for 95% of events, ensuring timely updates to release health scores.</p>
+    <h3>f4dc4a536bc7489098645b6bfaf808ce: Ensure the application complies with internal data protection policies, including data retention and access controls.</h3>
+    <ul><li>**Kind**: nonfunctional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: Ensure the application complies with internal data protection policies, including data retention and access controls.</p>
+    <h3>f57a03398d804606b4e7f73b8aa3168c: Integrate with the incident tracking tool to receive incident events in real-time via webhooks, capturing service name, timestamp, severity, and other relevant details.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Must | **Status**: Critical-Approved</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Integrate with the incident tracking tool to receive incident events in real-time via webhooks, capturing service name, timestamp, severity, and other relevant details.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>7d359f771a0445d1a0924e2254f53a1d: Ensure the application is maintainable, allowing for updates and modifications without significant downtime or disruption to service.</h3>
+    <ul><li>**Kind**: nonfunctional | **Priority**: Should | **Status**: draft</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: Ensure the application is maintainable, allowing for updates and modifications without significant downtime or disruption to service.</p>
+    <h3>c91171a8fd7e40519e727ee8ddbd1be6: Provide notifications to on-call engineers when a deploy event is associated with a high-severity incident, ensuring they are informed of potential issues.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Should | **Status**: draft</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Provide notifications to on-call engineers when a deploy event is associated with a high-severity incident, ensuring they are informed of potential issues.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <h3>d58e490dbc754eeab1f184b800c8c958: Ensure the application is scalable to handle increased data volumes as the number of deploys and incidents grows, with a target of supporting at least 1000 events per hour.</h3>
+    <ul><li>**Kind**: nonfunctional | **Priority**: Should | **Status**: draft</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: Ensure the application is scalable to handle increased data volumes as the number of deploys and incidents grows, with a target of supporting at least 1000 events per hour.</p>
+    <h3>f847540ed4804e598adf973e27c7ba4e: Provide a user interface that allows engineering managers to view the release health summary and drill down into specific incidents and deploy events.</h3>
+    <ul><li>**Kind**: functional | **Priority**: Should | **Status**: draft</li></ul>
+    <p>**Acceptance Criteria (Given / When / Then)**:</p>
+    <p>1. Given valid input, when the function described by this requirement is used, then the system does what it states: Provide a user interface that allows engineering managers to view the release health summary and drill down into specific incidents and deploy events.</p>
+    <p>1. Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.</p>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

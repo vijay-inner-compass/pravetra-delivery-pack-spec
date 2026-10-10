@@ -1,0 +1,283 @@
+{
+  "specVersion": "1.1.0",
+  "deliveryPackVersion": 1,
+  "pinnedRepositoryLabel": "No existing-system baseline (greenfield)",
+  "extensions": {
+    "pravetra": {
+      "blueprintId": "d9b1b0a421764fffbbe5782ad0fd6286",
+      "blueprintVersion": 3
+    }
+  },
+  "tasks": [
+    {
+      "taskId": "TASK-001",
+      "title": "Scaffold Primary Database (DataStore)",
+      "status": "NotStarted",
+      "dependsOn": []
+    },
+    {
+      "taskId": "TASK-001.1",
+      "parentTaskId": "TASK-001",
+      "title": "Ensure the application complies",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-002",
+      "title": "Scaffold API / Backend Service (DeployableUnit)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-002.1",
+      "parentTaskId": "TASK-002",
+      "title": "Surface repeated risky release patterns",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.2",
+      "parentTaskId": "TASK-002",
+      "title": "Integrate with the CI system to receive deploy",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.3",
+      "parentTaskId": "TASK-002",
+      "title": "Integrate with the incident tracking tool to receive",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.4",
+      "parentTaskId": "TASK-002",
+      "title": "Implement data encryption in transit and at rest",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.5",
+      "parentTaskId": "TASK-002",
+      "title": "Implement role-based access control for engineering managers",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.6",
+      "parentTaskId": "TASK-002",
+      "title": "Ensure the application is scalable (\u002B1 related Should requirement)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-003",
+      "title": "Scaffold Data Quality (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-003.1",
+      "parentTaskId": "TASK-003",
+      "title": "Maintain an audit log of all actions taken",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-003"
+      ]
+    },
+    {
+      "taskId": "TASK-004",
+      "title": "Scaffold Release Health Analytics (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-004.1",
+      "parentTaskId": "TASK-004",
+      "title": "Normalize incoming deploy and incident data to ensure",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-004.2",
+      "parentTaskId": "TASK-004",
+      "title": "Calculate a release-health score",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-004.3",
+      "parentTaskId": "TASK-004",
+      "title": "Application provides insights into the release health",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-004.4",
+      "parentTaskId": "TASK-004",
+      "title": "Compare release health scores across different teams",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-005",
+      "title": "Scaffold Digest Worker (BackgroundWorker)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-005.1",
+      "parentTaskId": "TASK-005",
+      "title": "Compile a summary of release health",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-005"
+      ]
+    },
+    {
+      "taskId": "TASK-005.2",
+      "parentTaskId": "TASK-005",
+      "title": "Ensure the application is available during working hours",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-005"
+      ]
+    },
+    {
+      "taskId": "TASK-005.3",
+      "parentTaskId": "TASK-005",
+      "title": "Provide notifications to on-call engineers",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-005"
+      ]
+    },
+    {
+      "taskId": "TASK-006",
+      "title": "Scaffold Ingest Worker (BackgroundWorker)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-006.1",
+      "parentTaskId": "TASK-006",
+      "title": "Process incoming webhook events",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-007",
+      "title": "Scaffold Scoring Worker (BackgroundWorker)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-007.1",
+      "parentTaskId": "TASK-007",
+      "title": "Run the scoring worker as own background process",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-007"
+      ]
+    },
+    {
+      "taskId": "TASK-007.2",
+      "parentTaskId": "TASK-007",
+      "title": "Take work",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-007"
+      ]
+    },
+    {
+      "taskId": "TASK-007.3",
+      "parentTaskId": "TASK-007",
+      "title": "Retry failed items",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-007"
+      ]
+    },
+    {
+      "taskId": "TASK-008",
+      "title": "Scaffold Web Client (ClientApp)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007"
+      ]
+    },
+    {
+      "taskId": "TASK-008.1",
+      "parentTaskId": "TASK-008",
+      "title": "Provide a consistent",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-008"
+      ]
+    },
+    {
+      "taskId": "TASK-008.2",
+      "parentTaskId": "TASK-008",
+      "title": "Provide a user interface that allows engineering managers",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-008"
+      ]
+    }
+  ],
+  "nextSafeAction": "Start TASK-001: Scaffold Primary Database (DataStore)",
+  "reconciliationGuidance": "If the repository\u0027s actual HEAD no longer matches the pinned baseline above, stop, re-run context ingestion (or otherwise confirm current reality) before trusting any task\u0027s currentStateEvidence or targetScope, and record the drift instead of silently proceeding."
+}

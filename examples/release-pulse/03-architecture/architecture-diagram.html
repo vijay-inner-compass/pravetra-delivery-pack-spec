@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Diagrams</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Architecture Diagram</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E02-release-pulse</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 10:53:23Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h2>1. Executive Summary</h2>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Component tables</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Requirement structure tables</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Sequence diagrams</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>Requirements without sequence diagrams</td>
+        <td>10</td>
+      </tr>
+    </table>
+    <h2>2. Components</h2>
+    <table>
+      <tr>
+        <th>Technology Decision</th>
+        <th>Rationale</th>
+        <th>External System</th>
+        <th>Integration Consideration</th>
+        <th>Selected Option</th>
+        <th>Rejected Alternatives</th>
+      </tr>
+      <tr>
+        <td>C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process vs Python workers beside a .NET API (a second runtime to build, deploy and monitor) vs Three separate .NET worker processes (three deployments for one small team group)</td>
+        <td>Server language, framework and hosting model. The owner mandates .NET. One process keeps deployment to a single published build, and hosted services give the workers a lifetime tied to the API host without a second runtime.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process</td>
+        <td>Python workers beside a .NET API (a second runtime to build, deploy and monitor); Three separate .NET worker processes (three deployments for one small team group)</td>
+      </tr>
+      <tr>
+        <td>a SQLite-backed job table polled by the hosted background services vs an in-process channel (System.Threading.Channels) inside the API host (events queued in memory are lost when the host restarts) vs a spool folder of JSON files read by the workers (no transactions; a crash can lose or double-process an event)</td>
+        <td>Database and background-work queue. SQLite is the mandated database. A job table written in the same transaction as the event makes the at-least-once, scored-once requirement testable, with no broker to run. Write-ahead mode lets the API read while a worker writes.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>a SQLite-backed job table polled by the hosted background services</td>
+        <td>an in-process channel (System.Threading.Channels) inside the API host (events queued in memory are lost when the host restarts); a spool folder of JSON files read by the workers (no transactions; a crash can lose or double-process an event)</td>
+      </tr>
+      <tr>
+        <td>ASP.NET Core Web API with SignalR vs ASP.NET Core Web API with polling mechanism</td>
+        <td>The choice between SignalR and polling hinges on the need for real-time updates versus simplicity. SignalR offers a more responsive user experience, which aligns with the requirement for timely insights, but comes with added complexity. Polling is easier to implement but may not meet the latency requirements effectively.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>ASP.NET Core Web API with polling mechanism</td>
+        <td>ASP.NET Core Web API with SignalR</td>
+      </tr>
+    </table>
+    <h2>3. Requirement Structure</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Kind</th>
+        <th>Priority</th>
+        <th>Parent</th>
+        <th>Statement</th>
+        <th>Acceptance criteria</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>realizes project</td>
+        <td>Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>realizes project</td>
+        <td>Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>Integrate with the incident tracking tool to receive incident events in real-time via webhooks, capturing service name, timestamp, severity, and other relevant details.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>Normalize incoming deploy and incident data to ensure consistency across all teams, applying defined rules for scoring release health.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>Calculate a release-health score based on defined rules, updating the score in real-time as new deploy and incident data is ingested.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>Compile a summary of release health for each team and email it to all engineering managers every Monday morning, ensuring timely delivery of insights.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>functional</td>
+        <td>Should</td>
+        <td>#1</td>
+        <td>Provide a user interface that allows engineering managers to view the release health summary and drill down into specific incidents and deploy events.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>Ensure the application is available during working hours, with monitoring in place to detect and alert on any downtime.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>Process incoming webhook events with a latency of no more than 2 seconds for 95% of events, ensuring timely updates to release health scores.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>Implement data encryption in transit and at rest to protect sensitive incident data, ensuring compliance with internal security policies.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>Maintain an audit log of all actions taken within the application, including data ingestion, scoring calculations, and user access, retaining logs for a minimum of 24 months.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>nonfunctional</td>
+        <td>Should</td>
+        <td>constrains project</td>
+        <td>Ensure the application is scalable to handle increased data volumes as the number of deploys and incidents grows, with a target of supporting at least 1000 events per hour.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>Implement role-based access control for engineering managers and on-call engineers to ensure appropriate permissions for viewing release health data.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td>functional</td>
+        <td>Should</td>
+        <td>#2</td>
+        <td>Provide notifications to on-call engineers when a deploy event is associated with a high-severity incident, ensuring they are informed of potential issues.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>Ensure the application complies with internal data protection policies, including data retention and access controls.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>realizes project</td>
+        <td>Ensure that the application provides insights into the release health of each service, allowing for comparisons across teams.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>Allow engineering managers to compare release health scores across different teams within the user interface.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td>nonfunctional</td>
+        <td>Should</td>
+        <td>constrains project</td>
+        <td>Ensure the application is maintainable, allowing for updates and modifications without significant downtime or disruption to service.</td>
+        <td>1</td>
+      </tr>
+    </table>
+    <h2>4. Sequence - Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>5. Sequence - Integrate with the incident tracking tool to receive incident events in real-time via webhooks, capturing service name, timestamp, severity, and other relevant details.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>6. Sequence - Normalize incoming deploy and incident data to ensure consistency across all teams, applying defined rules for scoring release health.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>7. Sequence - Calculate a release-health score based on defined rules, updating the score in real-time as new deploy and incident data is ingested.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>8. Sequence - Compile a summary of release health for each team and email it to all engineering managers every Monday morning, ensuring timely delivery of insights.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>9. Sequence - Provide a user interface that allows engineering managers to view the release health summary and drill down into specific incidents and deploy events.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>10. Sequence - Implement role-based access control for engineering managers and on-call engineers to ensure appropriate permissions for viewing release health data.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>11. Sequence - Provide notifications to on-call engineers when a deploy event is associated with a high-severity incident, ensuring they are informed of potential issues.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>12. Sequence - Allow engineering managers to compare release health scores across different teams within the user interface.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Fourteen_engineering_managers_who_need_the_weekly_view__the_head_of_platform_engineering_who_compares_teams__on_call_engineers_who_want_to_see_recent_risky_releases_for_the_service_they_are_paged_about_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>13. Requirements Without a Sequence Diagram</h2>
+    <ul><li>Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation. (No interaction steps)</li></ul>
+    <ul><li>Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner. (No interaction steps)</li></ul>
+    <ul><li>Ensure the application is available during working hours, with monitoring in place to detect and alert on any downtime. (No interaction steps)</li></ul>
+    <ul><li>Process incoming webhook events with a latency of no more than 2 seconds for 95% of events, ensuring timely updates to release health scores. (No interaction steps)</li></ul>
+    <ul><li>Implement data encryption in transit and at rest to protect sensitive incident data, ensuring compliance with internal security policies. (No interaction steps)</li></ul>
+    <ul><li>Maintain an audit log of all actions taken within the application, including data ingestion, scoring calculations, and user access, retaining logs for a minimum of 24 months. (No interaction steps)</li></ul>
+    <ul><li>Ensure the application is scalable to handle increased data volumes as the number of deploys and incidents grows, with a target of supporting at least 1000 events per hour. (No interaction steps)</li></ul>
+    <ul><li>Ensure the application complies with internal data protection policies, including data retention and access controls. (No interaction steps)</li></ul>
+    <ul><li>Ensure that the application provides insights into the release health of each service, allowing for comparisons across teams. (No interaction steps)</li></ul>
+    <ul><li>Ensure the application is maintainable, allowing for updates and modifications without significant downtime or disruption to service. (No interaction steps)</li></ul>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

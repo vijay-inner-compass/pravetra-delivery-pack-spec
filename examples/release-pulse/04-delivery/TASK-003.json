@@ -1,0 +1,149 @@
+{
+  "taskId": "TASK-003",
+  "title": "Scaffold Data Quality (LogicalModule)",
+  "outcome": "\u0027Data Quality\u0027 exists as a buildable skeleton, wired into the solution, with a working health check and no feature behaviour; its sub-tasks add the features.",
+  "status": "NotStarted",
+  "sequence": 10,
+  "parallelSafe": true,
+  "humanApprovalRequired": true,
+  "sourceRefs": [
+    {
+      "entityType": "BlueprintComponent",
+      "entityId": "5b2920f847184e13a5b9c622496ebfdf",
+      "name": "Data Quality"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "2e256e04822c45e682a8e122297a8f72",
+      "name": "Technology: C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "83bdfa6479364845ba31d373b5805387",
+      "name": "Technology: a SQLite-backed job table polled by the hosted background services"
+    }
+  ],
+  "baseline": {
+    "blueprintId": "d9b1b0a421764fffbbe5782ad0fd6286",
+    "blueprintVersion": 3,
+    "pinnedRepositoryLabel": "No existing-system baseline \u2014 greenfield project. Every target path below is Proposed, not discovered."
+  },
+  "dependsOn": [
+    "TASK-001",
+    "TASK-002"
+  ],
+  "unlocks": [
+    "TASK-003.1",
+    "TASK-005",
+    "TASK-006",
+    "TASK-007",
+    "TASK-008"
+  ],
+  "targetScope": [
+    {
+      "path": "(proposed) dataquality/",
+      "status": "Proposed",
+      "note": "No baseline exists for this path \u2014 treat it as a starting suggestion, not a fixed location."
+    }
+  ],
+  "allowedChanges": [
+    "Add the skeleton files within this task\u0027s target scope (dataquality/).",
+    "Add the build, wiring and health-check tests under tests/ for \u0027Data Quality\u0027.",
+    "Update service registration in the composition root / dependency injection module."
+  ],
+  "prohibitedChanges": [
+    "Implementing feature or requirement behaviour: that belongs to the sub-tasks of this component.",
+    "Modifying another task\u0027s target scope without an explicit, recorded dependency.",
+    "Introducing an unapproved external package, dependency, or architecture style not recorded in the Solution Blueprint.",
+    "Mutating applied database migrations in place - always create a new migration for schema changes.",
+    "Committing hardcoded secrets, API keys, credentials, or environment-specific values.",
+    "Altering or circumventing locked user decisions and governance constraints.",
+    "Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Do not substitute, replace, or alter the locked decision for Technology (C# on .NET: an ASP.NET Core API that also hosts the three background workers (ingest, scoring, digest) as hosted background services in one process).",
+    "Do not substitute, replace, or alter the locked decision for Technology (a SQLite-backed job table polled by the hosted background services).",
+    "Do not substitute, replace, or alter the locked decision for Technology (ASP.NET Core Web API with polling mechanism)."
+  ],
+  "currentStateEvidence": "Greenfield component per Solution Blueprint. Target responsibilities:\n\u2022 Implement core domain logic and invariant validation for: Provide a consistent, trustworthy weekly release-health view for all 14 engineering managers, reducing the manual assembly time from 90 minutes to under one minute by automating data aggregation.; Surface repeated risky release patterns before they escalate into incidents, ensuring that all managers are aware of potential issues in a timely manner.; Integrate with the CI system to receive deploy events in real-time via webhooks, capturing service name, timestamp, outcome, and change ticket ID for each deploy..\n\u2022 Validate command inputs and orchestrate state transitions.\n\u2022 Emit domain notifications and audit events upon state changes.",
+  "changeContract": "In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+  "contractChanges": [
+    {
+      "contractType": "API",
+      "changeDescription": "In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it."
+    },
+    {
+      "contractType": "Data",
+      "changeDescription": "Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation."
+    }
+  ],
+  "implementationSteps": [
+    "Scaffold the component boundary for \u0027Data Quality\u0027 (LogicalModule) within the target scope (dataquality/): the empty project or module structure only.",
+    "Wire \u0027Data Quality\u0027 into the composition root following existing repository conventions.",
+    "Add the registration entry point for \u0027Data Quality\u0027 and a trivial self-check that proves the module loads.",
+    "Do not implement any feature behaviour: the sub-tasks of TASK-003 (TASK-nnn.m) deliver it, one unit of functionality each.",
+    "Run the build and the health check; fix only what stops the skeleton from building or starting."
+  ],
+  "qualityAndSecurity": [
+    "Standard authentication and role-based authorization at every trust boundary this task touches.",
+    "No secret or environment configuration hard-coded \u2014 route all credentials through the Secrets service.",
+    "Clean architecture boundaries: adhere to separation of concerns and dependency inversion.",
+    "Data handling and retention specification: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.",
+    "API contract and security requirements: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+    "Architecture decomposition boundary: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.",
+    "Data residency \u0026 lifecycle policy: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat\u2026",
+    "Sensitive data governance \u0026 tokenization: The data entities are deploy events from the CI system and incident events from the paging tool (service name, timestamp, outcome, change ticket id, severity); both exist today, are clean enough to score, and are owned by platform engineering, which maintains the webhook schema and its versioning. Data quality is validated on ingest: every webhook is checked against the documented schema, duplicat\u2026",
+    "Human oversight \u0026 approval requirements: The head of platform engineering is the Technical Decision Owner and also the Risk Owner who tracks and mitigates the risks, the main one being score distrust. Evidence published for each gate review is the architecture diagram, the test coverage report and the replay-test results, and the head of platform engineering approves the pilot and the full rollout and holds the veto. Exceptions and accep\u2026",
+    "Security \u0026 encryption standard: Users sign in with the company single sign-on (OpenID Connect through ASP.NET Core authentication) and get team-scoped role-based access with least privilege, and each webhook source is authenticated with its own shared secret that is rotated quarterly and rejected otherwise. All traffic uses TLS 1.3, the database file sits on an encrypted disk volume, and secrets live in the server\u0027s protected co\u2026"
+  ],
+  "tests": [
+    "The solution builds with the \u0027Data Quality\u0027 skeleton in place.",
+    "Health check test: the module loads and its self-check passes.",
+    "Full regression test suite remains 100% green - this task must not regress another component."
+  ],
+  "commands": [
+    {
+      "executable": "dotnet",
+      "args": [
+        "build",
+        "--nologo"
+      ],
+      "purpose": "Build (dotnet)"
+    },
+    {
+      "executable": "dotnet",
+      "args": [
+        "test",
+        "--nologo"
+      ],
+      "purpose": "Test (dotnet)"
+    }
+  ],
+  "rollback": [
+    "git revert this task\u0027s commit(s) rather than editing history.",
+    "If a database migration was applied, roll it back before reverting code \u2014 never edit an already-applied migration in place."
+  ],
+  "definitionOfDone": [
+    "Done when \u0027Data Quality\u0027 builds, is wired into the solution and its health check passes, with no feature behaviour added.",
+    "Every step in Implementation Steps is complete.",
+    "Every item in Tests passes.",
+    "The repository\u0027s standard build and test commands (see Commands) are green.",
+    "No unresolved \u0027to be decided\u0027 marker remains anywhere this task touched.",
+    "This task\u0027s checkpointUpdate has been applied to execution-state.json."
+  ],
+  "checkpointUpdate": {
+    "targetFile": "07-agent/execution-state.json",
+    "updatedFields": [
+      "tasks[].status",
+      "tasks[].completedAt",
+      "nextSafeAction"
+    ],
+    "strategy": "Set this task\u0027s status to \u0027completed\u0027 and record completedAt, then recompute nextSafeAction as the first remaining not_started task whose dependsOn are all completed."
+  },
+  "escalateIf": [
+    "Completing this task\u0027s Outcome would require an architecture, data-model, or public-contract choice not already recorded in the Solution Blueprint \u2014 stop and ask a human rather than deciding it yourself.",
+    "A required credential, access grant, or environment value is missing.",
+    "The repository\u0027s actual current state no longer matches this task\u0027s pinned baseline (see START_HERE.md\u0027s baseline-drift reconciliation guidance).",
+    "A required human approval workflow or sign-off checkpoint is absent or bypassed.",
+    "Data residency or geographic isolation boundaries would be violated."
+  ]
+}
