@@ -1,0 +1,94 @@
+# TASK-004.1 — Evaluate arithmetic expressions
+
+- **Component:** Expression Evaluation · sub-task of TASK-004 · **Status:** not_started · **Parallel-safe:** No
+- **Depends on:** TASK-004 · **Unlocks:** (none)
+- Also follow the common rules in `07-agent/COMMON_RULES.md` (read it once; it applies to every task).
+
+## Outcome
+Evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like '100 - 10% + 5' return accurate results.
+> **Requirement:** The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like '100 - 10% + 5' return accurate results.
+
+## Done when
+- [ ] Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.
+- [ ] Given valid input, when the function described by this requirement is used, then the system does what it states: The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like '100 - 10% + 5' return accurate results.
+- [ ] Every acceptance criterion listed in Tests has a passing test, and the checkpoint notes name the test that proves it.
+
+## Write these tests first
+- negative case: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.
+- positive case: Given valid input, when the function described by this requirement is used, then the system does what it states: The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like '100 - 10% + 5' return accurate results.
+- Also: Acceptance (negative) for [Must] The calculator shall evaluate arithmetic expressions with...: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.
+- Also: Acceptance (positive) for [Must] The calculator shall evaluate arithmetic expressions with...: Given valid input, when the function described by this requirement is used, then the system does what it states: The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like '100 - 10% + 5' return accurate results.
+
+## Out of scope
+- the other sub-tasks of this component - TASK-004.2 (Evaluate arithmetic expressions quickly enough).
+- the responsibilities of the other components - Local Data Store, Calculation History, Error Reporting, Rounding and Precision, Console Host.
+
+## Applicable decisions
+- [6b86061daec44e2d9a7ac0d88388e6c6] Technology: C# on .NET 10 as a console application, tested with xUnit
+- [245f0843a31d48bcb3bfea5a95f1099a] Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite
+- [d24a599f6c4f4760a7e7251ca0673579] Technology: System.Decimal for arithmetic operations
+- [efb7f32edda64c679b9b293d2f4af6b3] Technology: Console.ReadLine for user input
+- [ca47ae8c4ad8485ab6351de4376c04c3] Technology: Decimal rounding for results
+- [021ab9627bfe41aa9d543550dffc57d1] Technology: Console.Error for error messages
+- **Must not contradict** any decision listed above.
+
+## Reviewer checklist
+- [ ] Every "Done when" item is met (2 listed), each shown by a named test or check.
+- [ ] Every test under "Write these tests first" exists, failed before the change, and passes now.
+- [ ] The applicable decisions and the common rules are respected and nothing contradicts them.
+- [ ] The out-of-scope items are untouched.
+- [ ] No unrelated changes: the diff stays inside the allowed paths and only this sub-task's behaviour changed.
+
+## Prohibited (this task)
+- Do not substitute, replace, or alter the locked decision for Technology (C# on .NET 10 as a console application, tested with xUnit).
+- Do not substitute, replace, or alter the locked decision for Technology (an embedded SQLite database file accessed with Microsoft.Data.Sqlite).
+- Do not substitute, replace, or alter the locked decision for Technology (System.Decimal for arithmetic operations).
+- Do not substitute, replace, or alter the locked decision for Technology (Console.ReadLine for user input).
+- Do not substitute, replace, or alter the locked decision for Technology (Decimal rounding for results).
+- Do not substitute, replace, or alter the locked decision for Technology (Console.Error for error messages).
+
+## Target Scope
+| Path | Status | Note |
+| --- | --- | --- |
+| `(proposed) expressionevaluation/` | Proposed | No baseline exists for this path — treat it as a starting suggestion, not a fixed location. |
+
+**Allowed changes:** Add, modify, or remove files within this task's target scope (expressionevaluation/) that this requirement needs. Add unit and integration tests under tests/ for this requirement of 'Expression Evaluation'. Update service registration in the composition root / dependency injection module where the behaviour needs it.
+
+## Implementation Steps
+1. Confirm the skeleton from TASK-004 builds and its health check passes.
+2. Implement: The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like '100 - 10% + 5' return accurate results.
+3. Follow the component's recorded responsibilities (see Current State Evidence) wherever they apply to this behaviour.
+4. Align the component interface with its contract: (see Contract)
+5. Keep to the component's data design: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.
+6. Implement the failure behaviour the negative acceptance criteria describe: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.
+
+## Contract
+In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.
+
+## Quality and Security (this task)
+- Data handling and retention specification: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.
+- Architecture decomposition boundary: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.
+- Non-functional target (The calculator shall evaluate arithmetic expressions quic...): The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst's laptop.
+- Non-functional target (The calculator shall be available to analysts whenever th...): The calculator shall be available to analysts whenever they work, because it runs locally on their laptop and needs no network or external service.
+- Non-functional target (The calculator shall use decimal arithmetic for all calcu...): The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.
+- Non-functional target (The calculator shall provide audit logging of all calcula...): The calculator shall provide audit logging of all calculations performed, including timestamps and user identifiers, stored in the SQLite database.
+- Non-functional target (The calculator shall ensure data retention by maintaining...): The calculator shall ensure data retention by maintaining the last 10 calculations in the SQLite database.
+- Non-functional target (The calculator shall be maintainable with a low operation...): The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.
+- Non-functional target (The calculator shall ensure compliance with internal data...): The calculator shall ensure compliance with internal data handling policies, given that no sensitive data is processed.
+- Non-functional target (The calculator shall ensure that all arithmetic operation...): The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places.
+
+## Current State Evidence
+Builds on the skeleton of 'Expression Evaluation' delivered by TASK-004. Greenfield component per Solution Blueprint. Target responsibilities:
+• Implement core domain logic and invariant validation for: The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like '100 - 10% + 5' return accurate results.; The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst's laptop..
+• Validate command inputs and orchestrate state transitions.
+• Emit domain notifications and audit events upon state changes.
+- **Source references:** BlueprintComponent: Expression Evaluation (`92d9f81ac4fc47faa1d55d9950be38e7`); Requirement: [Must] Evaluate arithmetic expressions (`9cb53f309d5848db8638644b37a146ec`); TechnologyDecision: Technology: C# on .NET 10 as a console application, tested with xUnit (`6b86061daec44e2d9a7ac0d88388e6c6`); TechnologyDecision: Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite (`245f0843a31d48bcb3bfea5a95f1099a`)
+- **Baseline:** No existing-system baseline — greenfield project. Every target path below is Proposed, not discovered.
+
+## Commands
+| Label | Command |
+| --- | --- |
+| Build (dotnet) | `dotnet build --nologo` |
+| Test (dotnet) | `dotnet test --nologo` |
+
+**Checkpoint:** when done, update `07-agent/execution-state.json` (fields: tasks[].status, tasks[].completedAt, nextSafeAction) as the common rules describe.

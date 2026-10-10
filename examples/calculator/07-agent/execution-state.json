@@ -1,0 +1,245 @@
+{
+  "specVersion": "1.1.0",
+  "deliveryPackVersion": 2,
+  "pinnedRepositoryLabel": "No existing-system baseline (greenfield)",
+  "extensions": {
+    "pravetra": {
+      "blueprintId": "5623eb2ee7e54bb5a03933168369065f",
+      "blueprintVersion": 2
+    }
+  },
+  "tasks": [
+    {
+      "taskId": "TASK-001",
+      "title": "Scaffold Local Data Store (DataStore)",
+      "status": "NotStarted",
+      "dependsOn": []
+    },
+    {
+      "taskId": "TASK-001.1",
+      "parentTaskId": "TASK-001",
+      "title": "Maintain a local SQLite database to store the last 10",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-001.2",
+      "parentTaskId": "TASK-001",
+      "title": "Ensure data retention by maintaining the last 10",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-002",
+      "title": "Scaffold Calculation History (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-002.1",
+      "parentTaskId": "TASK-002",
+      "title": "Provide audit logging (\u002B1 related Should requirement)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.2",
+      "parentTaskId": "TASK-002",
+      "title": "Delete calculation history from the SQLite database",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-003",
+      "title": "Scaffold Error Reporting (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-003.1",
+      "parentTaskId": "TASK-003",
+      "title": "Provide clear error messages for malformed expressions",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-003"
+      ]
+    },
+    {
+      "taskId": "TASK-003.2",
+      "parentTaskId": "TASK-003",
+      "title": "Accurately evaluate division operations",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-003"
+      ]
+    },
+    {
+      "taskId": "TASK-004",
+      "title": "Scaffold Expression Evaluation (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-004.1",
+      "parentTaskId": "TASK-004",
+      "title": "Evaluate arithmetic expressions",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-004.2",
+      "parentTaskId": "TASK-004",
+      "title": "Evaluate arithmetic expressions quickly enough",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-005",
+      "title": "Scaffold Rounding and Precision (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-005.1",
+      "parentTaskId": "TASK-005",
+      "title": "Handle rounding using decimal arithmetic to avoid",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-005"
+      ]
+    },
+    {
+      "taskId": "TASK-005.2",
+      "parentTaskId": "TASK-005",
+      "title": "Use decimal arithmetic for all calculations to ensure",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-005"
+      ]
+    },
+    {
+      "taskId": "TASK-005.3",
+      "parentTaskId": "TASK-005",
+      "title": "All arithmetic operations are performed",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-005"
+      ]
+    },
+    {
+      "taskId": "TASK-006",
+      "title": "Scaffold Console Host (DeployableUnit)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005"
+      ]
+    },
+    {
+      "taskId": "TASK-006.1",
+      "parentTaskId": "TASK-006",
+      "title": "Reduce the error rate in invoice total calculations",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.2",
+      "parentTaskId": "TASK-006",
+      "title": "Minimize rework time associated",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.3",
+      "parentTaskId": "TASK-006",
+      "title": "Run locally on each analyst\u0027s laptop",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.4",
+      "parentTaskId": "TASK-006",
+      "title": "Available to analysts whenever they work",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.5",
+      "parentTaskId": "TASK-006",
+      "title": "Input arithmetic expressions directly into the terminal",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.6",
+      "parentTaskId": "TASK-006",
+      "title": "Ensure the command-line calculator is compatible",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.7",
+      "parentTaskId": "TASK-006",
+      "title": "Ensure compliance with internal data handling policies",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.8",
+      "parentTaskId": "TASK-006",
+      "title": "Ensure the command-line calculator provides accurate results",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    },
+    {
+      "taskId": "TASK-006.9",
+      "parentTaskId": "TASK-006",
+      "title": "Provide built-in help documentation (\u002B2 related Should requirements)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-006"
+      ]
+    }
+  ],
+  "nextSafeAction": "Start TASK-001: Scaffold Local Data Store (DataStore)",
+  "reconciliationGuidance": "If the repository\u0027s actual HEAD no longer matches the pinned baseline above, stop, re-run context ingestion (or otherwise confirm current reality) before trusting any task\u0027s currentStateEvidence or targetScope, and record the drift instead of silently proceeding."
+}

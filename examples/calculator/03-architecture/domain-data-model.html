@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Data Model &amp; Entity Dictionary</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Domain Data Model &amp; Entity Dictionary</h1>
+    <p>This document specifies the **Domain Data Model, Entity Boundaries, and Schema Requirements** for **E01-calculator**. It provides the persistence models, aggregate roots, relationships, and data governance rules required for autonomous coding agents implementing **TASK-001 (Primary Database / Persistence)** and component domain services across **Domain-Driven Design (DDD)**, **Scrum Data Modeling**, **SAFe Architecture Enablers**, and **Enterprise Database Engineering**.</p>
+    <h2>1. Architecture &amp; Persistence Context</h2>
+    <table>
+      <tr>
+        <th>Architecture Attribute</th>
+        <th>Specification</th>
+      </tr>
+      <tr>
+        <td>Architecture Style</td>
+        <td>Modular Monolith</td>
+      </tr>
+      <tr>
+        <td>Decomposition Structure</td>
+        <td>ModularMonolith</td>
+      </tr>
+      <tr>
+        <td>Target Schema Version</td>
+        <td>v2</td>
+      </tr>
+    </table>
+    <h3>Decided Persistence Stack</h3>
+    <ul><li>**Technology**: an embedded SQLite database file accessed with Microsoft.Data.Sqlite (rejected alternatives, do not use: a JSON file rewritten after every calculation (no transactions; a crash mid-write corrupts the history); a plain-text file with one line per calculation (same weakness, and no way to enforce the last-10 rule atomically)). Rationale: Storage for the calculation history. SQLite is the mandated database. It gives transactional writes, survives a crash mid-write, needs no server and is one file to back up or delete.</li></ul>
+    <ul><li>**Technology**: Decimal rounding for results (rejected alternatives, do not use: String formatting for output). Rationale: Decimal rounding is essential for financial accuracy, while string formatting enhances user experience. Both should be implemented to ensure the calculator meets its functional requirements.</li></ul>
+    <h2>2. Component Entity &amp; Schema Specifications</h2>
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Kind</th>
+        <th>Responsibilities</th>
+        <th>Data Design &amp; Entities</th>
+      </tr>
+      <tr>
+        <td>Local Data Store</td>
+        <td>DataStore</td>
+        <td>• Provide durable, ACID-compliant persistence for all domain entities and audit events. • Enforce relational integrity, foreign key constraints, and unique indexes. • Support point-in-time recovery and snapshot durability.</td>
+        <td>Relational database schema with versioned schema migrations. Indexed primary and foreign keys; created_at/updated_at audit columns on all primary tables. Technology decided for this component: SQLite (a technology decision, not a component of its own).</td>
+      </tr>
+      <tr>
+        <td>Console Host</td>
+        <td>DeployableUnit</td>
+        <td>• Expose secure RESTful API endpoints for client and external consumers. • Enforce authentication, role-based authorization, and rate limiting. • Coordinate transactional unit-of-work across domain modules. • Emit structured audit logs and operational telemetry.</td>
+        <td>Coordinates database transactions across modules; manages connection lifetimes and migration application.</td>
+      </tr>
+      <tr>
+        <td>Calculation History</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: The calculator shall provide audit logging of all calculations performed, including timestamps and user identifiers, stored in the SQLite database.; The calculator shall provide a mechanism for users to delete their calculation history from the SQLite database.; The calculator shall provide a mechanism for users to view their calculation history from the SQLite database.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+      <tr>
+        <td>Error Reporting</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: The calculator shall provide clear error messages for malformed expressions, preventing crashes and ensuring user understanding.; The calculator shall accurately evaluate division operations, including handling division by zero gracefully.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+      <tr>
+        <td>Expression Evaluation</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like &#39;100 - 10% + 5&#39; return accurate results.; The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst&#39;s laptop.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+      <tr>
+        <td>Rounding and Precision</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: The calculator shall handle rounding using decimal arithmetic to avoid floating-point inaccuracies.; The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.; The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+    </table>
+    <h2>3. Entity Details &amp; Data Governance Notes</h2>
+    <h3>Local Data Store (DataStore)</h3>
+    <ul><li>**Domain Responsibilities**: • Provide durable, ACID-compliant persistence for all domain entities and audit events.</li></ul>
+    <p>• Enforce relational integrity, foreign key constraints, and unique indexes.</p>
+    <p>• Support point-in-time recovery and snapshot durability.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Relational database schema with versioned schema migrations. Indexed primary and foreign keys; created_at/updated_at audit columns on all primary tables. Technology decided for this component: SQLite (a technology decision, not a component of its own).</li></ul>
+    <ul><li>**API &amp; Query Interface**: Database access through the chosen data-access layer with connection pooling, command timeouts, and retry-on-failure strategies.</li></ul>
+    <ul><li>**Boundary Rationale**: Centralized relational database ensures ACID transaction guarantees and cross-module relational consistency without complex distributed transactions.</li></ul>
+    <h3>Console Host (DeployableUnit)</h3>
+    <ul><li>**Domain Responsibilities**: • Expose secure RESTful API endpoints for client and external consumers.</li></ul>
+    <p>• Enforce authentication, role-based authorization, and rate limiting.</p>
+    <p>• Coordinate transactional unit-of-work across domain modules.</p>
+    <p>• Emit structured audit logs and operational telemetry.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Coordinates database transactions across modules; manages connection lifetimes and migration application.</li></ul>
+    <ul><li>**API &amp; Query Interface**: HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error.</li></ul>
+    <ul><li>**Boundary Rationale**: Core deployable boundary hosting API surface and domain logic as a cohesive ModularMonolith unit, balancing maintainability and deployment simplicity.</li></ul>
+    <h3>Calculation History (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: The calculator shall provide audit logging of all calculations performed, including timestamps and user identifiers, stored in the SQLite database.; The calculator shall provide a mechanism for users to delete their calculation history from the SQLite database.; The calculator shall provide a mechanism for users to view their calculation history from the SQLite database..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h3>Error Reporting (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: The calculator shall provide clear error messages for malformed expressions, preventing crashes and ensuring user understanding.; The calculator shall accurately evaluate division operations, including handling division by zero gracefully..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h3>Expression Evaluation (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like &#39;100 - 10% + 5&#39; return accurate results.; The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst&#39;s laptop..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h3>Rounding and Precision (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: The calculator shall handle rounding using decimal arithmetic to avoid floating-point inaccuracies.; The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.; The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h2>4. Coding Agent Implementation Rules for TASK-001 (Database &amp; Persistence)</h2>
+    <p>When implementing database schema, migrations, and entities:</p>
+    <p>1. **Strict Boundary Conformance**: Implement only the tables, aggregates, and fields required by the domain specifications above and referenced requirements. Do not invent unapproved tables or bypass entity ownership boundaries.</p>
+    <p>2. **Auditability &amp; Temporal Tracking**: Every primary persistence entity must include audit tracking fields (`CreatedAt`, `UpdatedAt`) and strong unique identifier keys (e.g. UUID/GUID or identity keys).</p>
+    <p>3. **Referential Integrity &amp; Cascades**: Foreign keys must have explicit delete behaviors (avoid inadvertent cascading deletions on primary aggregates; use soft deletes or fail-closed foreign key checks where appropriate).</p>
+    <p>4. **Zero-Migration Loss**: Migrations must be additive, forward-compatible, and idempotent. Never mutate applied migrations in place.</p>
+    <p>5. **Data Protection &amp; Classification**: Ensure restricted data, credentials, and PII are marked for encryption at rest and never logged in plain text.</p>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

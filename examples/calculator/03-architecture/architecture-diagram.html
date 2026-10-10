@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Diagrams</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Architecture Diagram</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h2>1. Executive Summary</h2>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Component tables</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Requirement structure tables</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Sequence diagrams</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>Requirements without sequence diagrams</td>
+        <td>13</td>
+      </tr>
+    </table>
+    <h2>2. Components</h2>
+    <table>
+      <tr>
+        <th>Technology Decision</th>
+        <th>Rationale</th>
+        <th>External System</th>
+        <th>Integration Consideration</th>
+        <th>Selected Option</th>
+        <th>Rejected Alternatives</th>
+      </tr>
+      <tr>
+        <td>C# on .NET 10 as a console application, tested with xUnit vs Python 3 script tested with pytest (the team knows .NET; a Python runtime would have to be installed on analyst laptops) vs F# on .NET 10 (no team experience)</td>
+        <td>Implementation language and test framework. The team already knows C# and .NET, and System.Decimal avoids the binary floating-point errors that are the core problem. The owner mandates .NET for the showcase.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>C# on .NET 10 as a console application, tested with xUnit</td>
+        <td>Python 3 script tested with pytest (the team knows .NET; a Python runtime would have to be installed on analyst laptops); F# on .NET 10 (no team experience)</td>
+      </tr>
+      <tr>
+        <td>an embedded SQLite database file accessed with Microsoft.Data.Sqlite vs a JSON file rewritten after every calculation (no transactions; a crash mid-write corrupts the history) vs a plain-text file with one line per calculation (same weakness, and no way to enforce the last-10 rule atomically)</td>
+        <td>Storage for the calculation history. SQLite is the mandated database. It gives transactional writes, survives a crash mid-write, needs no server and is one file to back up or delete.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>an embedded SQLite database file accessed with Microsoft.Data.Sqlite</td>
+        <td>a JSON file rewritten after every calculation (no transactions; a crash mid-write corrupts the history); a plain-text file with one line per calculation (same weakness, and no way to enforce the last-10 rule atomically)</td>
+      </tr>
+      <tr>
+        <td>System.Decimal for arithmetic operations vs double for arithmetic operations</td>
+        <td>System.Decimal is the preferred choice for this project due to its ability to handle financial calculations accurately. The requirement for precise arithmetic evaluation (R10) and the need to avoid floating-point inaccuracies make System.Decimal the only viable option. Switching to double would compromise the integrity of the calculations, which is unacceptable given the project&#39;s goals.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>System.Decimal for arithmetic operations</td>
+        <td>double for arithmetic operations</td>
+      </tr>
+      <tr>
+        <td>Console.ReadLine for user input vs Command-line arguments for user input</td>
+        <td>Both input methods are viable, but Console.ReadLine is preferred for its simplicity and direct interaction with users. Command-line arguments can be considered for advanced use cases where batch processing is needed.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>Console.ReadLine for user input</td>
+        <td>Command-line arguments for user input</td>
+      </tr>
+      <tr>
+        <td>Decimal rounding for results vs String formatting for output</td>
+        <td>Decimal rounding is essential for financial accuracy, while string formatting enhances user experience. Both should be implemented to ensure the calculator meets its functional requirements.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>Decimal rounding for results</td>
+        <td>String formatting for output</td>
+      </tr>
+      <tr>
+        <td>Console.Error for error messages vs Throwing exceptions for error handling</td>
+        <td>Both options provide mechanisms for handling errors gracefully, but using Console.Error aligns with the requirement for clear user feedback without crashing the application.</td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>Console.Error for error messages</td>
+        <td>Throwing exceptions for error handling</td>
+      </tr>
+    </table>
+    <h2>3. Requirement Structure</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Kind</th>
+        <th>Priority</th>
+        <th>Parent</th>
+        <th>Statement</th>
+        <th>Acceptance criteria</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>realizes project</td>
+        <td>Reduce the error rate in invoice total calculations from approximately 5% to under 0.5% by implementing a command-line calculator.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>realizes project</td>
+        <td>Minimize rework time associated with incorrect invoice totals from roughly 30 minutes per error to near zero.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like &#39;100 - 10% + 5&#39; return accurate results.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>The calculator shall handle rounding using decimal arithmetic to avoid floating-point inaccuracies.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>The calculator shall provide clear error messages for malformed expressions, preventing crashes and ensuring user understanding.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>The calculator shall maintain a local SQLite database to store the last 10 calculations, allowing users to access their calculation history.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>The calculator shall run locally on each analyst&#39;s laptop without requiring network access or external services.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst&#39;s laptop.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>The calculator shall be available to analysts whenever they work, because it runs locally on their laptop and needs no network or external service.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>nonfunctional</td>
+        <td>Should</td>
+        <td>constrains project</td>
+        <td>The calculator shall provide audit logging of all calculations performed, including timestamps and user identifiers, stored in the SQLite database.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>The calculator shall allow users to input arithmetic expressions directly into the terminal interface.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>functional</td>
+        <td>Should</td>
+        <td>#1</td>
+        <td>The calculator shall provide built-in help documentation accessible from the terminal.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>The calculator shall ensure data retention by maintaining the last 10 calculations in the SQLite database.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td>business</td>
+        <td>Should</td>
+        <td>realizes project</td>
+        <td>Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>functional</td>
+        <td>Could</td>
+        <td>#1</td>
+        <td>The calculator shall provide a mechanism for users to delete their calculation history from the SQLite database.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>nonfunctional</td>
+        <td>Should</td>
+        <td>constrains project</td>
+        <td>The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>realizes project</td>
+        <td>Ensure the command-line calculator is compatible with Windows, macOS, and Linux operating systems.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td>functional</td>
+        <td>Should</td>
+        <td>#1</td>
+        <td>The calculator shall provide a mechanism for users to view their calculation history from the SQLite database.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td>nonfunctional</td>
+        <td>Must</td>
+        <td>constrains project</td>
+        <td>The calculator shall ensure compliance with internal data handling policies, given that no sensitive data is processed.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td>business</td>
+        <td>Must</td>
+        <td>realizes project</td>
+        <td>Ensure the command-line calculator provides accurate results for various arithmetic operations, including addition, subtraction, multiplication, and division.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>22</td>
+        <td>functional</td>
+        <td>Must</td>
+        <td>#1</td>
+        <td>The calculator shall accurately evaluate division operations, including handling division by zero gracefully.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>23</td>
+        <td>nonfunctional</td>
+        <td>Should</td>
+        <td>constrains project</td>
+        <td>The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places.</td>
+        <td>1</td>
+      </tr>
+    </table>
+    <h2>4. Sequence - The calculator shall evaluate arithmetic expressions with proper operator precedence, ensuring that expressions like &#39;100 - 10% + 5&#39; return accurate results.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>5. Sequence - The calculator shall handle rounding using decimal arithmetic to avoid floating-point inaccuracies.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>6. Sequence - The calculator shall provide clear error messages for malformed expressions, preventing crashes and ensuring user understanding.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>7. Sequence - The calculator shall maintain a local SQLite database to store the last 10 calculations, allowing users to access their calculation history.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>8. Sequence - The calculator shall run locally on each analyst&#39;s laptop without requiring network access or external services.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>9. Sequence - The calculator shall allow users to input arithmetic expressions directly into the terminal interface.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>10. Sequence - The calculator shall provide built-in help documentation accessible from the terminal.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>11. Sequence - The calculator shall provide a mechanism for users to delete their calculation history from the SQLite database.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>12. Sequence - The calculator shall provide a mechanism for users to view their calculation history from the SQLite database.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>13. Sequence - The calculator shall accurately evaluate division operations, including handling division by zero gracefully.</h2>
+    <div class="diagram-card">
+      <div class="mermaid">
+sequenceDiagram
+    Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_-&gt;&gt;Web_Application: Submits request for automated processing
+    Web_Application-&gt;&gt;Processing_Pipeline: Dispatches payload for validation and enrichment
+    Processing_Pipeline-&gt;&gt;Data_Store: Persists verified record with audit telemetry
+    Web_Application-&gt;&gt;Finance_operations_analysts__6_people__who_check_invoice_totals_every_day__and_their_team_lead__who_reviews_and_signs_off_the_corrected_totals__They_use_it_from_a_terminal_on_their_own_laptops_: Renders completion confirmation with status summary
+      </div>
+    </div>    <h2>14. Requirements Without a Sequence Diagram</h2>
+    <ul><li>Reduce the error rate in invoice total calculations from approximately 5% to under 0.5% by implementing a command-line calculator. (No interaction steps)</li></ul>
+    <ul><li>Minimize rework time associated with incorrect invoice totals from roughly 30 minutes per error to near zero. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst&#39;s laptop. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall be available to analysts whenever they work, because it runs locally on their laptop and needs no network or external service. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall provide audit logging of all calculations performed, including timestamps and user identifiers, stored in the SQLite database. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall ensure data retention by maintaining the last 10 calculations in the SQLite database. (No interaction steps)</li></ul>
+    <ul><li>Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes. (No interaction steps)</li></ul>
+    <ul><li>Ensure the command-line calculator is compatible with Windows, macOS, and Linux operating systems. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall ensure compliance with internal data handling policies, given that no sensitive data is processed. (No interaction steps)</li></ul>
+    <ul><li>Ensure the command-line calculator provides accurate results for various arithmetic operations, including addition, subtraction, multiplication, and division. (No interaction steps)</li></ul>
+    <ul><li>The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places. (No interaction steps)</li></ul>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Data & Migrations
+
+> Canonical policy version: blueprint-v2-tasks-26-e1ec194e
+> Generated: 2026-10-09 10:18:38Z
+> Project: E01-calculator
+Complete — 1 data store(s) recorded in the catalog. Governed by AIGuard data lifecycle & protection: dataFoundations: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst's own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid…; dataLifecycle: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst's own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid…; dataQualityAndSensitivity: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst's own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid….
+
+A schema migration is always a new, versioned file — never edit an already-applied migration in place.

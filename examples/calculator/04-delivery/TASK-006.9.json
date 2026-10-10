@@ -1,0 +1,196 @@
+{
+  "taskId": "TASK-006.9",
+  "parentTaskId": "TASK-006",
+  "title": "Provide built-in help documentation (\u002B2 related Should requirements)",
+  "outcome": "\u0027Console Host\u0027 delivers: The calculator shall provide built-in help documentation accessible from the terminal. Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts. The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes. Done when Given valid input, when the function described by this requirement is used, then the system does what it states: The calculator shall provide built-in help documentation accessible from the terminal; Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log; Given the solution is in use, when the people it is built for carry out the work this requirement describes, then the stated outcome is observed and recorded: Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts; Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.",
+  "status": "NotStarted",
+  "sequence": 26,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "sourceRefs": [
+    {
+      "entityType": "BlueprintComponent",
+      "entityId": "d8260f5a775848888fbc77db937908c7",
+      "name": "Console Host"
+    },
+    {
+      "entityType": "Requirement",
+      "entityId": "2b37f62e18824c729f2151070bdf07bb",
+      "name": "[Should] Provide built-in help documentation accessible from the terminal"
+    },
+    {
+      "entityType": "Requirement",
+      "entityId": "a227e9b14b204906b9da79ef9fa09252",
+      "name": "[Should] Command-line calculator is user-friendly and requires minimal training"
+    },
+    {
+      "entityType": "Requirement",
+      "entityId": "db5d3811e5574fea9b6cca8537ed88f2",
+      "name": "[Should] Maintainable with a low operational cost"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "6b86061daec44e2d9a7ac0d88388e6c6",
+      "name": "Technology: C# on .NET 10 as a console application, tested with xUnit"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "245f0843a31d48bcb3bfea5a95f1099a",
+      "name": "Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite"
+    }
+  ],
+  "baseline": {
+    "blueprintId": "5623eb2ee7e54bb5a03933168369065f",
+    "blueprintVersion": 2,
+    "pinnedRepositoryLabel": "No existing-system baseline \u2014 greenfield project. Every target path below is Proposed, not discovered."
+  },
+  "dependsOn": [
+    "TASK-006"
+  ],
+  "unlocks": [],
+  "targetScope": [
+    {
+      "path": "(proposed) consolehost/",
+      "status": "Proposed",
+      "note": "No baseline exists for this path \u2014 treat it as a starting suggestion, not a fixed location."
+    }
+  ],
+  "allowedChanges": [
+    "Add, modify, or remove files within this task\u0027s target scope (consolehost/) that this requirement needs.",
+    "Add unit and integration tests under tests/ for this requirement of \u0027Console Host\u0027.",
+    "Update service registration in the composition root / dependency injection module where the behaviour needs it."
+  ],
+  "prohibitedChanges": [
+    "Implementing a requirement that belongs to another sub-task of TASK-006 or to another component\u0027s task.",
+    "Modifying another task\u0027s target scope without an explicit, recorded dependency.",
+    "Introducing an unapproved external package, dependency, or architecture style not recorded in the Solution Blueprint.",
+    "Mutating applied database migrations in place - always create a new migration for schema changes.",
+    "Committing hardcoded secrets, API keys, credentials, or environment-specific values.",
+    "Altering or circumventing locked user decisions and governance constraints.",
+    "Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Do not substitute, replace, or alter the locked decision for Technology (C# on .NET 10 as a console application, tested with xUnit).",
+    "Do not substitute, replace, or alter the locked decision for Technology (an embedded SQLite database file accessed with Microsoft.Data.Sqlite).",
+    "Do not substitute, replace, or alter the locked decision for Technology (System.Decimal for arithmetic operations).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Console.ReadLine for user input).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Decimal rounding for results).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Console.Error for error messages).",
+    "Out of scope (build nothing of): the other sub-tasks of this component - TASK-006.1 (Reduce the error rate in invoice total calculations); TASK-006.2 (Minimize rework time associated); TASK-006.3 (Run locally on each analyst\u0027s laptop); TASK-006.4 (Available to analysts whenever they work); TASK-006.5 (Input arithmetic expressions directly into the terminal); TASK-006.6 (Ensure the command-line calculator is compatible); TASK-006.7 (Ensure compliance with internal data handling policies); TASK-006.8 (Ensure the command-line calculator provides accurate results).",
+    "Out of scope (build nothing of): the responsibilities of the other components - Local Data Store, Calculation History, Error Reporting, Expression Evaluation, Rounding and Precision."
+  ],
+  "currentStateEvidence": "Builds on the skeleton of \u0027Console Host\u0027 delivered by TASK-006. Greenfield component per Solution Blueprint. Target responsibilities:\n\u2022 Expose secure RESTful API endpoints for client and external consumers.\n\u2022 Enforce authentication, role-based authorization, and rate limiting.\n\u2022 Coordinate transactional unit-of-work across domain modules.\n\u2022 Emit structured audit logs and operational telemetry.",
+  "changeContract": "HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error.",
+  "contractChanges": [],
+  "implementationSteps": [
+    "Write the failing tests listed under \u0027Write first\u0027 in Tests (one per acceptance criterion, negative cases included) and run them to see them fail.",
+    "Confirm the skeleton from TASK-006 builds and its health check passes.",
+    "Implement: The calculator shall provide built-in help documentation accessible from the terminal.",
+    "Implement: Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts.",
+    "Implement: The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.",
+    "Follow the component\u0027s recorded responsibilities (see Current State Evidence) wherever they apply to this behaviour.",
+    "Align the component interface with its contract: HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error.",
+    "Keep to the component\u0027s data design: Coordinates database transactions across modules; manages connection lifetimes and migration application.",
+    "Run the new tests and the commands listed; every \u0027Write first\u0027 test must now pass.",
+    "Report: update the checkpoint (execution-state.json) naming the tests that prove each \u0027Done when\u0027 item, then stop.",
+    "Implement the failure behaviour the negative acceptance criteria describe: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log."
+  ],
+  "qualityAndSecurity": [
+    "Input validation, robust CLI argument/flag parsing, and structured exit code handling.",
+    "No secret or environment configuration hard-coded \u2014 accept sensitive credentials or configuration paths via environment variables or CLI arguments without hard-coded defaults.",
+    "Clean architecture boundaries: adhere to separation of concerns and dependency inversion.",
+    "Data handling and retention specification: Coordinates database transactions across modules; manages connection lifetimes and migration application.",
+    "API contract and security requirements: HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error.",
+    "Architecture decomposition boundary: Core deployable boundary hosting API surface and domain logic as a cohesive ModularMonolith unit, balancing maintainability and deployment simplicity.",
+    "Data residency \u0026 lifecycle policy: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst\u0027s own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid\u2026",
+    "Sensitive data governance \u0026 tokenization: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst\u0027s own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid\u2026",
+    "Human oversight \u0026 approval requirements: The finance operations lead is the Technical Decision Owner for scope and acceptance and also the Risk Owner who tracks and mitigates the risks, and the engineering lead approves releases. The key risks are rounding errors (decimal arithmetic and tests), crashes on bad input (explicit error handling and tests) and history database corruption (integrity check and rebuild), with residual risk low an\u2026",
+    "Security \u0026 encryption standard: There is no authentication or authorization model because the tool runs locally under the analyst\u0027s own operating-system login and makes no network calls and holds no credentials. Input is parsed by a strict recursive-descent grammar with no eval or scripting, and the history database is created in the user\u0027s own profile folder with the user\u0027s normal file permissions and holds only expressions and\u2026",
+    "Applicable technology decision [6b86061daec44e2d9a7ac0d88388e6c6] Technology: C# on .NET 10 as a console application, tested with xUnit",
+    "Applicable technology decision [245f0843a31d48bcb3bfea5a95f1099a] Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite",
+    "Applicable technology decision [d24a599f6c4f4760a7e7251ca0673579] Technology: System.Decimal for arithmetic operations",
+    "Applicable technology decision [efb7f32edda64c679b9b293d2f4af6b3] Technology: Console.ReadLine for user input",
+    "Applicable technology decision [ca47ae8c4ad8485ab6351de4376c04c3] Technology: Decimal rounding for results",
+    "Applicable technology decision [021ab9627bfe41aa9d543550dffc57d1] Technology: Console.Error for error messages",
+    "Governance constraint (data residency): do not do the following - Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Governance constraint (human approval): do not do the following - Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Must not contradict: Technology: C# on .NET 10 as a console application, tested with xUnit | Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite | Technology: System.Decimal for arithmetic operations | Technology: Console.ReadLine for user input | Technology: Decimal rounding for results | Technology: Console.Error for error messages",
+    "Non-functional target (The calculator shall evaluate arithmetic expressions quic...): The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst\u0027s laptop.",
+    "Non-functional target (The calculator shall be available to analysts whenever th...): The calculator shall be available to analysts whenever they work, because it runs locally on their laptop and needs no network or external service.",
+    "Non-functional target (The calculator shall use decimal arithmetic for all calcu...): The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.",
+    "Non-functional target (The calculator shall provide audit logging of all calcula...): The calculator shall provide audit logging of all calculations performed, including timestamps and user identifiers, stored in the SQLite database.",
+    "Non-functional target (The calculator shall ensure data retention by maintaining...): The calculator shall ensure data retention by maintaining the last 10 calculations in the SQLite database.",
+    "Non-functional target (The calculator shall be maintainable with a low operation...): The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.",
+    "Non-functional target (The calculator shall ensure compliance with internal data...): The calculator shall ensure compliance with internal data handling policies, given that no sensitive data is processed.",
+    "Non-functional target (The calculator shall ensure that all arithmetic operation...): The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places."
+  ],
+  "tests": [
+    "Write first (must fail before the implementation) - positive case: Given valid input, when the function described by this requirement is used, then the system does what it states: The calculator shall provide built-in help documentation accessible from the terminal.",
+    "Write first (must fail before the implementation) - negative case: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.",
+    "Write first (must fail before the implementation) - positive case: Given the solution is in use, when the people it is built for carry out the work this requirement describes, then the stated outcome is observed and recorded: Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts.",
+    "Write first (must fail before the implementation) - positive case: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.",
+    "Negative scenario: Verify invalid arguments, non-zero exit codes, and robust error output for malformed inputs.",
+    "Boundary condition: Verify boundary thresholds, empty collections, and null state handling.",
+    "Full regression test suite remains 100% green - this task must not regress another component.",
+    "Acceptance (positive) for [Should] The calculator shall provide built-in help documentation ...: Given valid input, when the function described by this requirement is used, then the system does what it states: The calculator shall provide built-in help documentation accessible from the terminal.",
+    "Acceptance (negative) for [Should] The calculator shall provide built-in help documentation ...: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.",
+    "Acceptance (positive) for [Should] Ensure that the command-line calculator is user-friendly ...: Given the solution is in use, when the people it is built for carry out the work this requirement describes, then the stated outcome is observed and recorded: Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts.",
+    "Acceptance (positive) for [Should] The calculator shall be maintainable with a low operation...: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes."
+  ],
+  "commands": [
+    {
+      "executable": "dotnet",
+      "args": [
+        "build",
+        "--nologo"
+      ],
+      "purpose": "Build (dotnet)"
+    },
+    {
+      "executable": "dotnet",
+      "args": [
+        "test",
+        "--nologo"
+      ],
+      "purpose": "Test (dotnet)"
+    }
+  ],
+  "rollback": [
+    "git revert this task\u0027s commit(s) rather than editing history.",
+    "If a database migration was applied, roll it back before reverting code \u2014 never edit an already-applied migration in place."
+  ],
+  "definitionOfDone": [
+    "Done when: Given valid input, when the function described by this requirement is used, then the system does what it states: The calculator shall provide built-in help documentation accessible from the terminal.",
+    "Done when: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.",
+    "Done when: Given the solution is in use, when the people it is built for carry out the work this requirement describes, then the stated outcome is observed and recorded: Ensure that the command-line calculator is user-friendly and requires minimal training for the finance operations analysts.",
+    "Done when: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.",
+    "Every step in Implementation Steps is complete.",
+    "Every item in Tests passes.",
+    "The repository\u0027s standard build and test commands (see Commands) are green.",
+    "No unresolved \u0027to be decided\u0027 marker remains anywhere this task touched.",
+    "This task\u0027s checkpointUpdate has been applied to execution-state.json.",
+    "Every acceptance criterion listed in Tests has a passing test, and the checkpoint notes name the test that proves it."
+  ],
+  "reviewerChecklist": [
+    "Every \u0027Done when\u0027 item is met (4 listed in Definition of Done), each shown by a named test or check.",
+    "Every test listed under \u0027Write first\u0027 in Tests exists, failed before the change, and passes now.",
+    "The applicable decisions and constraints in Quality and Security are respected and nothing contradicts them.",
+    "The out-of-scope items in Prohibited Changes are untouched.",
+    "No unrelated changes: the diff stays inside the allowed paths and only this sub-task\u0027s behaviour changed."
+  ],
+  "checkpointUpdate": {
+    "targetFile": "07-agent/execution-state.json",
+    "updatedFields": [
+      "tasks[].status",
+      "tasks[].completedAt",
+      "nextSafeAction"
+    ],
+    "strategy": "Set this task\u0027s status to \u0027completed\u0027 and record completedAt, then recompute nextSafeAction as the first remaining not_started task whose dependsOn are all completed."
+  },
+  "escalateIf": [
+    "Completing this task\u0027s Outcome would require an architecture, data-model, or public-contract choice not already recorded in the Solution Blueprint \u2014 stop and ask a human rather than deciding it yourself.",
+    "A required credential, access grant, or environment value is missing.",
+    "The repository\u0027s actual current state no longer matches this task\u0027s pinned baseline (see START_HERE.md\u0027s baseline-drift reconciliation guidance).",
+    "A required human approval workflow or sign-off checkpoint is absent or bypassed.",
+    "Data residency or geographic isolation boundaries would be violated."
+  ]
+}

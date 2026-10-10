@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gate 2 Report</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Gate 2 Report</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h2>1. Executive Summary</h2>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Open blockers</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>Tracked risks</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Evidence gaps</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Recorded approvals</td>
+        <td>7</td>
+      </tr>
+    </table>
+    <h2>2. Blockers</h2>
+    <p>_No blockers._</p>
+    <h2>3. Risks</h2>
+    <ul><li>Main risk: floating-point rounding could produce wrong cents on money values, so the calculator must use decimal arithmetic, not double. Secondary risks: a malformed expression crashing the tool instead of showing a clear error, and the local history database being corrupted or edited by hand. No personal data, no network and no compliance regime applies.</li></ul>
+    <h2>4. Remediation Plan</h2>
+    <p>_No remediation items._</p>
+    <h2>5. Evidence Gaps</h2>
+    <p>A dimension listed here has no evidence file or link attached to its assessment in Pravetra yet. This is not a judgment that no such evidence exists, only that none has been recorded.</p>
+    <ul><li>Strategy / Business Readiness: no evidence attached yet</li></ul>
+    <ul><li>Data Readiness: no evidence attached yet</li></ul>
+    <ul><li>Technology Readiness: no evidence attached yet</li></ul>
+    <ul><li>People / Skills Readiness: no evidence attached yet</li></ul>
+    <ul><li>Process Readiness: no evidence attached yet</li></ul>
+    <ul><li>Security / Privacy Readiness: no evidence attached yet</li></ul>
+    <ul><li>Governance / Risk Readiness: no evidence attached yet</li></ul>
+    <h2>6. Approvals</h2>
+    <ul><li>Strategy / Business Readiness</li></ul>
+    <ul><li>Data Readiness</li></ul>
+    <ul><li>Technology Readiness</li></ul>
+    <ul><li>People / Skills Readiness</li></ul>
+    <ul><li>Process Readiness</li></ul>
+    <ul><li>Security / Privacy Readiness</li></ul>
+    <ul><li>Governance / Risk Readiness</li></ul>
+    <h2>7. Decision Record</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Outcome</td>
+        <td>Ready</td>
+      </tr>
+      <tr>
+        <td>Approved by</td>
+        <td>approver@example.com</td>
+      </tr>
+      <tr>
+        <td>Recorded</td>
+        <td>2026-10-09 09:25:49Z</td>
+      </tr>
+      <tr>
+        <td>Rationale</td>
+        <td>Every required AIGuard dimension is assessed and the recorded risks are mitigated. Scripted approval by demo run 9bfcb19cb7284db0875b6dd697a3d68f.</td>
+      </tr>
+    </table>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

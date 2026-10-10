@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Dossier</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Executive Dossier</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h2>Contents</h2>
+    <p>1. Gate 1 Summary (v1)</p>
+    <p>2. Solution Recommendation (v1)</p>
+    <p>3. Gate 2 Governance Report (v1)</p>
+    <p>4. Implementation Readiness Report (v1)</p>
+    <p>---</p>
+    <h1>1. Gate 1 Summary</h1>
+    <h2>Gate 1 Summary</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h3>1. Executive Summary</h3>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Overall readiness</td>
+        <td>Ready for Gate 1 decision</td>
+      </tr>
+    </table>
+    <h3>2. Readiness Assessment</h3>
+    <table>
+      <tr>
+        <th>Element</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>problem</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>users</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>current state</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>alternatives</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>AI necessity</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>solution direction</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>build/buy options</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>cost</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>benefit</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>risks</td>
+        <td>Satisfied</td>
+      </tr>
+    </table>
+    <h3>3. Decision Record</h3>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Outcome</td>
+        <td>Proceed</td>
+      </tr>
+      <tr>
+        <td>Approved by</td>
+        <td>approver@example.com</td>
+      </tr>
+      <tr>
+        <td>Recorded</td>
+        <td>2026-10-09 09:25:19Z</td>
+      </tr>
+      <tr>
+        <td>Rationale</td>
+        <td>Idea validated, proceeding to solution design. Scripted approval by demo run 9bfcb19cb7284db0875b6dd697a3d68f.</td>
+      </tr>
+    </table>
+    <h3>4. Open Actions</h3>
+    <ul><li>No open readiness gaps identified in the generated checklist.</li></ul>
+    <h3>5. Distribution Notes</h3>
+    <ul><li>Suitable for project governance review after stakeholder validation.</li></ul>
+    <ul><li>Regenerate before sign-off if IdeaForge inputs change.</li></ul>
+    <p>---</p>
+    <h1>2. Solution Recommendation</h1>
+    <h2>Recommendation Document</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h3>1. Executive Summary</h3>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Recommended concept</td>
+        <td>traditional_software</td>
+      </tr>
+      <tr>
+        <td>Software required</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>AI required</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Approval status</td>
+        <td>Approved</td>
+      </tr>
+      <tr>
+        <td>Confidence</td>
+        <td>High</td>
+      </tr>
+    </table>
+    <h3>2. Rationale</h3>
+    <p>The proposed solution of a command-line calculator is categorized as &#39;traditional_software&#39; because it directly addresses the arithmetic errors in invoice totals through deterministic logic. While a &#39;rules_engine&#39; could also enforce arithmetic rules, it would not provide the same level of user control and simplicity that a dedicated calculator offers. The complexity of implementing a rules engine for this specific use case, where the primary need is accurate arithmetic evaluation, does not justify its use. The traditional software approach ensures that the team can input calculations directly and receive immediate feedback, which is essential for their daily operations.</p>
+    <h3>3. Expected Business Value</h3>
+    <p>The solution is expected to reduce rework time from 30 minutes per incorrect total to near zero, saving approximately 6 engineer-hours a week across the team, which translates to about 300 hours a year. This is based on the current error rate of 5% leading to significant rework.</p>
+    <h3>4. Data Requirements</h3>
+    <p>The calculator will require input in the form of arithmetic expressions entered via the terminal. Outputs will be the evaluated results of these expressions. The local SQLite database will store the last 10 calculations, requiring a simple schema with fields for expression, result, and timestamp. Latency should be near real-time, with minimal delay for calculations.</p>
+    <h3>5. Constraints</h3>
+    <p>The solution must run locally on each analyst&#39;s laptop without requiring network access or external services. It must also comply with the team&#39;s existing workflow, which relies on terminal usage.</p>
+    <h3>6. Assumptions</h3>
+    <p>It is assumed that the finance operations team will consistently use the calculator for all invoice total checks and that they will not revert to manual methods. It is also assumed that the tool will be maintained with updates as needed, without significant changes to its core functionality.</p>
+    <h3>7. Evidence Reference</h3>
+    <p>The recommendation is supported by the business problem description, which highlights the need for a reliable calculator to reduce errors and rework time. The proposed solution&#39;s feasibility and expected benefits are detailed in the project data.</p>
+    <h3>8. Alternative Concepts</h3>
+    <ul><li>rules_engine</li></ul>
+    <h3>9. Hybrid Components</h3>
+    <p>_None captured._</p>
+    <h3>10. Major Risks</h3>
+    <ul><li>Floating-point rounding could produce incorrect results if not handled with decimal arithmetic.</li></ul>
+    <ul><li>Malformed expressions could crash the tool instead of providing a clear error message.</li></ul>
+    <ul><li>The local history database could become corrupted or edited manually, leading to inaccurate records.</li></ul>
+    <h3>11. Review Guidance</h3>
+    <ul><li>Confirm recommendation alignment with business objectives before approval.</li></ul>
+    <ul><li>Validate data, risk, and cost assumptions before delivery planning.</li></ul>
+    <p>---</p>
+    <h1>3. Gate 2 Governance Report</h1>
+    <h2>Gate 2 Report</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h3>1. Executive Summary</h3>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Open blockers</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>Tracked risks</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Evidence gaps</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Recorded approvals</td>
+        <td>7</td>
+      </tr>
+    </table>
+    <h3>2. Blockers</h3>
+    <p>_No blockers._</p>
+    <h3>3. Risks</h3>
+    <ul><li>Main risk: floating-point rounding could produce wrong cents on money values, so the calculator must use decimal arithmetic, not double. Secondary risks: a malformed expression crashing the tool instead of showing a clear error, and the local history database being corrupted or edited by hand. No personal data, no network and no compliance regime applies.</li></ul>
+    <h3>4. Remediation Plan</h3>
+    <p>_No remediation items._</p>
+    <h3>5. Evidence Gaps</h3>
+    <p>A dimension listed here has no evidence file or link attached to its assessment in Pravetra yet. This is not a judgment that no such evidence exists, only that none has been recorded.</p>
+    <ul><li>Strategy / Business Readiness: no evidence attached yet</li></ul>
+    <ul><li>Data Readiness: no evidence attached yet</li></ul>
+    <ul><li>Technology Readiness: no evidence attached yet</li></ul>
+    <ul><li>People / Skills Readiness: no evidence attached yet</li></ul>
+    <ul><li>Process Readiness: no evidence attached yet</li></ul>
+    <ul><li>Security / Privacy Readiness: no evidence attached yet</li></ul>
+    <ul><li>Governance / Risk Readiness: no evidence attached yet</li></ul>
+    <h3>6. Approvals</h3>
+    <ul><li>Strategy / Business Readiness</li></ul>
+    <ul><li>Data Readiness</li></ul>
+    <ul><li>Technology Readiness</li></ul>
+    <ul><li>People / Skills Readiness</li></ul>
+    <ul><li>Process Readiness</li></ul>
+    <ul><li>Security / Privacy Readiness</li></ul>
+    <ul><li>Governance / Risk Readiness</li></ul>
+    <h3>7. Decision Record</h3>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Outcome</td>
+        <td>Ready</td>
+      </tr>
+      <tr>
+        <td>Approved by</td>
+        <td>approver@example.com</td>
+      </tr>
+      <tr>
+        <td>Recorded</td>
+        <td>2026-10-09 09:25:49Z</td>
+      </tr>
+      <tr>
+        <td>Rationale</td>
+        <td>Every required AIGuard dimension is assessed and the recorded risks are mitigated. Scripted approval by demo run 9bfcb19cb7284db0875b6dd697a3d68f.</td>
+      </tr>
+    </table>
+    <p>---</p>
+    <h1>4. Implementation Readiness Report</h1>
+    <h2>Implementation Readiness Report</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h3>1. Executive Summary</h3>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Requirements (critical approved / total)</td>
+        <td>16 / 23</td>
+      </tr>
+      <tr>
+        <td>Technology decisions (decided / total)</td>
+        <td>6 / 6</td>
+      </tr>
+      <tr>
+        <td>Open critical risks</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>Gate 4 checklist (satisfied / total)</td>
+        <td>28 / 29</td>
+      </tr>
+      <tr>
+        <td>Implementation ready</td>
+        <td>No</td>
+      </tr>
+    </table>
+    <h3>2. Gate 3 Readiness Checklist</h3>
+    <table>
+      <tr>
+        <th>Element</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>Gate 2 decision recorded</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no technology proposal is left unreviewed</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no Must requirement holds an unconfirmed (proposed) figure</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no unresolved material-change trigger</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>critical requirements approved</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decisions have alternatives and rationale</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>security/data/AI fields complete</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decision recorded when software is required</td>
+        <td>Satisfied</td>
+      </tr>
+    </table>
+    <h3>3. Gate 3 Decision Record</h3>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Outcome</td>
+        <td>Approved</td>
+      </tr>
+      <tr>
+        <td>Approved by</td>
+        <td>approver@example.com</td>
+      </tr>
+      <tr>
+        <td>Recorded</td>
+        <td>2026-10-09 09:38:38Z</td>
+      </tr>
+      <tr>
+        <td>Rationale</td>
+        <td>Architecture approved for the invoice total calculator: a C# on .NET 10 console application using System.Decimal, tested with xUnit, with calculation history in an embedded SQLite file. All six technology decisions are confirmed with accepted ADRs; the mandate (.NET and SQLite only) is respected. Recorded by the coordinator at the owner&#39;s explicit instruction on 9 Oct 2026.</td>
+      </tr>
+    </table>
+    <h3>4. Gate 4 Readiness Checklist</h3>
+    <table>
+      <tr>
+        <th>Element</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>no unresolved material-change trigger since Gate 3</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no technology proposal is left unreviewed</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decisions have alternatives and rationale</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>AI architecture considerations complete for the current governance tier</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>approved blueprint and implementation-ready delivery pack exist</td>
+        <td>Not satisfied</td>
+      </tr>
+      <tr>
+        <td>critical requirements approved</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>critical requirements have acceptance criteria</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>ADRs approved</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no open governance blockers</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>security fields complete</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>architecture drivers have decided technology decisions</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no unresolved dependencies</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>risks mitigated or accepted</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>traceability &gt;= 95%</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decision recorded when software is required</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>work-type override provenance recorded</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>change requests reference an approved baseline</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>blueprints built from a baseline reference an approved snapshot</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>analyzed change requests classify backward compatibility</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>approved blueprints have an approved decomposition</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>approved blueprints have no blocking concerns or unresolved delivery-policy questions</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no pending technology-suitability approvals on approved blueprints</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>implementation-ready delivery packs carry no validation issues</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>implementation-ready tasks are structurally complete</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>commercial section only attached by a real economics calculation</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>latest economics assessment references the current delivery pack</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>latest economics assessment references the current blueprint</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>confirmed economic assumptions cite a source</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>Warning: 8 blueprint concern(s) are still unconfirmed templates (TechnologyLanguageSelection, DomainDesign, SecurityPrivacy, QualityAttributes, Testing, Observability, DeliveryWorkflow, CostCapacity); confirm or edit them in ForgeFlow</td>
+        <td>Satisfied</td>
+      </tr>
+    </table>
+    <h3>5. Gate 4 Decision Record</h3>
+    <p>_No decision recorded yet._</p>
+    <h3>6. Release Readiness Guidance</h3>
+    <ul><li>Treat unresolved checklist items as blockers for formal release readiness.</li></ul>
+    <ul><li>Regenerate after requirements, technology decisions, or critical risks change.</li></ul>
+    <p>---</p>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

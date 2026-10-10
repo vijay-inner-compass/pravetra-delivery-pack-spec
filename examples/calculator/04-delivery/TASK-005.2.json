@@ -1,0 +1,174 @@
+{
+  "taskId": "TASK-005.2",
+  "parentTaskId": "TASK-005",
+  "title": "Use decimal arithmetic for all calculations to ensure",
+  "outcome": "\u0027Rounding and Precision\u0027 delivers: The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations. Done when Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.",
+  "status": "NotStarted",
+  "sequence": 15,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "sourceRefs": [
+    {
+      "entityType": "BlueprintComponent",
+      "entityId": "d60145edd14a4b468fc4a4b1f8caccf4",
+      "name": "Rounding and Precision"
+    },
+    {
+      "entityType": "Requirement",
+      "entityId": "626928676f3343eab30cca32ea5af00e",
+      "name": "[Must] Use decimal arithmetic for all calculations to ensure accuracy in financial"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "6b86061daec44e2d9a7ac0d88388e6c6",
+      "name": "Technology: C# on .NET 10 as a console application, tested with xUnit"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "245f0843a31d48bcb3bfea5a95f1099a",
+      "name": "Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite"
+    }
+  ],
+  "baseline": {
+    "blueprintId": "5623eb2ee7e54bb5a03933168369065f",
+    "blueprintVersion": 2,
+    "pinnedRepositoryLabel": "No existing-system baseline \u2014 greenfield project. Every target path below is Proposed, not discovered."
+  },
+  "dependsOn": [
+    "TASK-005"
+  ],
+  "unlocks": [],
+  "targetScope": [
+    {
+      "path": "(proposed) roundingandprecision/",
+      "status": "Proposed",
+      "note": "No baseline exists for this path \u2014 treat it as a starting suggestion, not a fixed location."
+    }
+  ],
+  "allowedChanges": [
+    "Add, modify, or remove files within this task\u0027s target scope (roundingandprecision/) that this requirement needs.",
+    "Add unit and integration tests under tests/ for this requirement of \u0027Rounding and Precision\u0027.",
+    "Update service registration in the composition root / dependency injection module where the behaviour needs it."
+  ],
+  "prohibitedChanges": [
+    "Implementing a requirement that belongs to another sub-task of TASK-005 or to another component\u0027s task.",
+    "Modifying another task\u0027s target scope without an explicit, recorded dependency.",
+    "Introducing an unapproved external package, dependency, or architecture style not recorded in the Solution Blueprint.",
+    "Committing hardcoded secrets, API keys, credentials, or environment-specific values.",
+    "Altering or circumventing locked user decisions and governance constraints.",
+    "Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Do not substitute, replace, or alter the locked decision for Technology (C# on .NET 10 as a console application, tested with xUnit).",
+    "Do not substitute, replace, or alter the locked decision for Technology (an embedded SQLite database file accessed with Microsoft.Data.Sqlite).",
+    "Do not substitute, replace, or alter the locked decision for Technology (System.Decimal for arithmetic operations).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Console.ReadLine for user input).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Decimal rounding for results).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Console.Error for error messages).",
+    "Out of scope (build nothing of): the other sub-tasks of this component - TASK-005.1 (Handle rounding using decimal arithmetic to avoid); TASK-005.3 (All arithmetic operations are performed).",
+    "Out of scope (build nothing of): the responsibilities of the other components - Local Data Store, Calculation History, Error Reporting, Expression Evaluation, Console Host."
+  ],
+  "currentStateEvidence": "Builds on the skeleton of \u0027Rounding and Precision\u0027 delivered by TASK-005. Greenfield component per Solution Blueprint. Target responsibilities:\n\u2022 Implement core domain logic and invariant validation for: The calculator shall handle rounding using decimal arithmetic to avoid floating-point inaccuracies.; The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.; The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places..\n\u2022 Validate command inputs and orchestrate state transitions.\n\u2022 Emit domain notifications and audit events upon state changes.",
+  "changeContract": "In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+  "contractChanges": [],
+  "implementationSteps": [
+    "Write the failing tests listed under \u0027Write first\u0027 in Tests (one per acceptance criterion, negative cases included) and run them to see them fail.",
+    "Confirm the skeleton from TASK-005 builds and its health check passes.",
+    "Implement: The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.",
+    "Follow the component\u0027s recorded responsibilities (see Current State Evidence) wherever they apply to this behaviour.",
+    "Align the component interface with its contract: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+    "Keep to the component\u0027s data design: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.",
+    "Run the new tests and the commands listed; every \u0027Write first\u0027 test must now pass.",
+    "Report: update the checkpoint (execution-state.json) naming the tests that prove each \u0027Done when\u0027 item, then stop."
+  ],
+  "qualityAndSecurity": [
+    "Input validation, robust CLI argument/flag parsing, and structured exit code handling.",
+    "No secret or environment configuration hard-coded \u2014 accept sensitive credentials or configuration paths via environment variables or CLI arguments without hard-coded defaults.",
+    "Clean architecture boundaries: adhere to separation of concerns and dependency inversion.",
+    "Data handling and retention specification: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.",
+    "API contract and security requirements: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+    "Architecture decomposition boundary: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.",
+    "Data residency \u0026 lifecycle policy: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst\u0027s own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid\u2026",
+    "Sensitive data governance \u0026 tokenization: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst\u0027s own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid\u2026",
+    "Human oversight \u0026 approval requirements: The finance operations lead is the Technical Decision Owner for scope and acceptance and also the Risk Owner who tracks and mitigates the risks, and the engineering lead approves releases. The key risks are rounding errors (decimal arithmetic and tests), crashes on bad input (explicit error handling and tests) and history database corruption (integrity check and rebuild), with residual risk low an\u2026",
+    "Security \u0026 encryption standard: There is no authentication or authorization model because the tool runs locally under the analyst\u0027s own operating-system login and makes no network calls and holds no credentials. Input is parsed by a strict recursive-descent grammar with no eval or scripting, and the history database is created in the user\u0027s own profile folder with the user\u0027s normal file permissions and holds only expressions and\u2026",
+    "Applicable technology decision [6b86061daec44e2d9a7ac0d88388e6c6] Technology: C# on .NET 10 as a console application, tested with xUnit",
+    "Applicable technology decision [245f0843a31d48bcb3bfea5a95f1099a] Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite",
+    "Applicable technology decision [d24a599f6c4f4760a7e7251ca0673579] Technology: System.Decimal for arithmetic operations",
+    "Applicable technology decision [efb7f32edda64c679b9b293d2f4af6b3] Technology: Console.ReadLine for user input",
+    "Applicable technology decision [ca47ae8c4ad8485ab6351de4376c04c3] Technology: Decimal rounding for results",
+    "Applicable technology decision [021ab9627bfe41aa9d543550dffc57d1] Technology: Console.Error for error messages",
+    "Governance constraint (data residency): do not do the following - Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Governance constraint (human approval): do not do the following - Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Must not contradict: Technology: C# on .NET 10 as a console application, tested with xUnit | Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite | Technology: System.Decimal for arithmetic operations | Technology: Console.ReadLine for user input | Technology: Decimal rounding for results | Technology: Console.Error for error messages",
+    "Non-functional target (The calculator shall evaluate arithmetic expressions quic...): The calculator shall evaluate arithmetic expressions quickly enough for interactive use on an analyst\u0027s laptop.",
+    "Non-functional target (The calculator shall be available to analysts whenever th...): The calculator shall be available to analysts whenever they work, because it runs locally on their laptop and needs no network or external service.",
+    "Non-functional target (The calculator shall use decimal arithmetic for all calcu...): The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.",
+    "Non-functional target (The calculator shall provide audit logging of all calcula...): The calculator shall provide audit logging of all calculations performed, including timestamps and user identifiers, stored in the SQLite database.",
+    "Non-functional target (The calculator shall ensure data retention by maintaining...): The calculator shall ensure data retention by maintaining the last 10 calculations in the SQLite database.",
+    "Non-functional target (The calculator shall be maintainable with a low operation...): The calculator shall be maintainable with a low operational cost, requiring no more than half an engineer-day per quarter for updates and fixes.",
+    "Non-functional target (The calculator shall ensure compliance with internal data...): The calculator shall ensure compliance with internal data handling policies, given that no sensitive data is processed.",
+    "Non-functional target (The calculator shall ensure that all arithmetic operation...): The calculator shall ensure that all arithmetic operations are performed with a precision of at least 2 decimal places."
+  ],
+  "tests": [
+    "Write first (must fail before the implementation) - positive case: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.",
+    "Write first (must fail before the implementation) - negative case: invalid, unauthorised or malformed input for this behaviour is rejected with a clear error.",
+    "Negative scenario: Verify invalid arguments, non-zero exit codes, and robust error output for malformed inputs.",
+    "Boundary condition: Verify boundary thresholds, empty collections, and null state handling.",
+    "Full regression test suite remains 100% green - this task must not regress another component.",
+    "Acceptance (positive) for [Must] The calculator shall use decimal arithmetic for all calcu...: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations."
+  ],
+  "commands": [
+    {
+      "executable": "dotnet",
+      "args": [
+        "build",
+        "--nologo"
+      ],
+      "purpose": "Build (dotnet)"
+    },
+    {
+      "executable": "dotnet",
+      "args": [
+        "test",
+        "--nologo"
+      ],
+      "purpose": "Test (dotnet)"
+    }
+  ],
+  "rollback": [
+    "git revert this task\u0027s commit(s) rather than editing history.",
+    "If a database migration was applied, roll it back before reverting code \u2014 never edit an already-applied migration in place."
+  ],
+  "definitionOfDone": [
+    "Done when: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The calculator shall use decimal arithmetic for all calculations to ensure accuracy in financial computations.",
+    "Every step in Implementation Steps is complete.",
+    "Every item in Tests passes.",
+    "The repository\u0027s standard build and test commands (see Commands) are green.",
+    "No unresolved \u0027to be decided\u0027 marker remains anywhere this task touched.",
+    "This task\u0027s checkpointUpdate has been applied to execution-state.json.",
+    "Every acceptance criterion listed in Tests has a passing test, and the checkpoint notes name the test that proves it."
+  ],
+  "reviewerChecklist": [
+    "Every \u0027Done when\u0027 item is met (1 listed in Definition of Done), each shown by a named test or check.",
+    "Every test listed under \u0027Write first\u0027 in Tests exists, failed before the change, and passes now.",
+    "The applicable decisions and constraints in Quality and Security are respected and nothing contradicts them.",
+    "The out-of-scope items in Prohibited Changes are untouched.",
+    "No unrelated changes: the diff stays inside the allowed paths and only this sub-task\u0027s behaviour changed."
+  ],
+  "checkpointUpdate": {
+    "targetFile": "07-agent/execution-state.json",
+    "updatedFields": [
+      "tasks[].status",
+      "tasks[].completedAt",
+      "nextSafeAction"
+    ],
+    "strategy": "Set this task\u0027s status to \u0027completed\u0027 and record completedAt, then recompute nextSafeAction as the first remaining not_started task whose dependsOn are all completed."
+  },
+  "escalateIf": [
+    "Completing this task\u0027s Outcome would require an architecture, data-model, or public-contract choice not already recorded in the Solution Blueprint \u2014 stop and ask a human rather than deciding it yourself.",
+    "A required credential, access grant, or environment value is missing.",
+    "The repository\u0027s actual current state no longer matches this task\u0027s pinned baseline (see START_HERE.md\u0027s baseline-drift reconciliation guidance).",
+    "A required human approval workflow or sign-off checkpoint is absent or bypassed.",
+    "Data residency or geographic isolation boundaries would be violated."
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "taskId": "TASK-006",
+  "title": "Scaffold Console Host (DeployableUnit)",
+  "outcome": "\u0027Console Host\u0027 exists as a buildable skeleton, wired into the solution, with a working health check and no feature behaviour; its sub-tasks add the features.",
+  "status": "NotStarted",
+  "sequence": 17,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "sourceRefs": [
+    {
+      "entityType": "BlueprintComponent",
+      "entityId": "d8260f5a775848888fbc77db937908c7",
+      "name": "Console Host"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "6b86061daec44e2d9a7ac0d88388e6c6",
+      "name": "Technology: C# on .NET 10 as a console application, tested with xUnit"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "245f0843a31d48bcb3bfea5a95f1099a",
+      "name": "Technology: an embedded SQLite database file accessed with Microsoft.Data.Sqlite"
+    }
+  ],
+  "baseline": {
+    "blueprintId": "5623eb2ee7e54bb5a03933168369065f",
+    "blueprintVersion": 2,
+    "pinnedRepositoryLabel": "No existing-system baseline \u2014 greenfield project. Every target path below is Proposed, not discovered."
+  },
+  "dependsOn": [
+    "TASK-001",
+    "TASK-002",
+    "TASK-003",
+    "TASK-004",
+    "TASK-005"
+  ],
+  "unlocks": [
+    "TASK-006.1",
+    "TASK-006.2",
+    "TASK-006.3",
+    "TASK-006.4",
+    "TASK-006.5",
+    "TASK-006.6",
+    "TASK-006.7",
+    "TASK-006.8",
+    "TASK-006.9"
+  ],
+  "targetScope": [
+    {
+      "path": "(proposed) consolehost/",
+      "status": "Proposed",
+      "note": "No baseline exists for this path \u2014 treat it as a starting suggestion, not a fixed location."
+    }
+  ],
+  "allowedChanges": [
+    "Add the skeleton files within this task\u0027s target scope (consolehost/).",
+    "Add the build, wiring and health-check tests under tests/ for \u0027Console Host\u0027.",
+    "Update service registration in the composition root / dependency injection module."
+  ],
+  "prohibitedChanges": [
+    "Implementing feature or requirement behaviour: that belongs to the sub-tasks of this component.",
+    "Modifying another task\u0027s target scope without an explicit, recorded dependency.",
+    "Introducing an unapproved external package, dependency, or architecture style not recorded in the Solution Blueprint.",
+    "Mutating applied database migrations in place - always create a new migration for schema changes.",
+    "Committing hardcoded secrets, API keys, credentials, or environment-specific values.",
+    "Altering or circumventing locked user decisions and governance constraints.",
+    "Transmitting, caching, or routing sensitive or customer data to external regions or unapproved third-party endpoints.",
+    "Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Do not substitute, replace, or alter the locked decision for Technology (C# on .NET 10 as a console application, tested with xUnit).",
+    "Do not substitute, replace, or alter the locked decision for Technology (an embedded SQLite database file accessed with Microsoft.Data.Sqlite).",
+    "Do not substitute, replace, or alter the locked decision for Technology (System.Decimal for arithmetic operations).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Console.ReadLine for user input).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Decimal rounding for results).",
+    "Do not substitute, replace, or alter the locked decision for Technology (Console.Error for error messages)."
+  ],
+  "currentStateEvidence": "Greenfield component per Solution Blueprint. Target responsibilities:\n\u2022 Expose secure RESTful API endpoints for client and external consumers.\n\u2022 Enforce authentication, role-based authorization, and rate limiting.\n\u2022 Coordinate transactional unit-of-work across domain modules.\n\u2022 Emit structured audit logs and operational telemetry.",
+  "changeContract": "HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error.",
+  "contractChanges": [
+    {
+      "contractType": "API",
+      "changeDescription": "HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error."
+    },
+    {
+      "contractType": "Data",
+      "changeDescription": "Coordinates database transactions across modules; manages connection lifetimes and migration application."
+    }
+  ],
+  "implementationSteps": [
+    "Scaffold the component boundary for \u0027Console Host\u0027 (DeployableUnit) within the target scope (consolehost/): the empty project or module structure only.",
+    "Wire \u0027Console Host\u0027 into the composition root following existing repository conventions.",
+    "Add a health command (for example \u0060--health\u0060) that exits 0 when the tool starts and its configuration loads.",
+    "Do not implement any feature behaviour: the sub-tasks of TASK-006 (TASK-nnn.m) deliver it, one unit of functionality each.",
+    "Run the build and the health check; fix only what stops the skeleton from building or starting."
+  ],
+  "qualityAndSecurity": [
+    "Input validation, robust CLI argument/flag parsing, and structured exit code handling.",
+    "No secret or environment configuration hard-coded \u2014 accept sensitive credentials or configuration paths via environment variables or CLI arguments without hard-coded defaults.",
+    "Clean architecture boundaries: adhere to separation of concerns and dependency inversion.",
+    "Data handling and retention specification: Coordinates database transactions across modules; manages connection lifetimes and migration application.",
+    "API contract and security requirements: HTTPS REST endpoints. Methods: GET, POST, PUT, DELETE. Bearer token authorization. Standard JSON request/response models with RFC 7807 problem details on error.",
+    "Architecture decomposition boundary: Core deployable boundary hosting API surface and domain logic as a cohesive ModularMonolith unit, balancing maintainability and deployment simplicity.",
+    "Data residency \u0026 lifecycle policy: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst\u0027s own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid\u2026",
+    "Sensitive data governance \u0026 tokenization: The data entities are arithmetic expressions typed by the analyst (numbers and operators only) and a calculation history held in a local SQLite database on the analyst\u0027s own laptop; there are no imports and no pipelines, and the schema is versioned by a migration script inside the tool. The finance operations lead owns the data. Quality is validated on entry: values are parsed as decimals, invalid\u2026",
+    "Human oversight \u0026 approval requirements: The finance operations lead is the Technical Decision Owner for scope and acceptance and also the Risk Owner who tracks and mitigates the risks, and the engineering lead approves releases. The key risks are rounding errors (decimal arithmetic and tests), crashes on bad input (explicit error handling and tests) and history database corruption (integrity check and rebuild), with residual risk low an\u2026",
+    "Security \u0026 encryption standard: There is no authentication or authorization model because the tool runs locally under the analyst\u0027s own operating-system login and makes no network calls and holds no credentials. Input is parsed by a strict recursive-descent grammar with no eval or scripting, and the history database is created in the user\u0027s own profile folder with the user\u0027s normal file permissions and holds only expressions and\u2026"
+  ],
+  "tests": [
+    "The solution builds with the \u0027Console Host\u0027 skeleton in place.",
+    "Health check test: the health check reports success after startup and failure when a required dependency is unreachable.",
+    "Full regression test suite remains 100% green - this task must not regress another component."
+  ],
+  "commands": [
+    {
+      "executable": "dotnet",
+      "args": [
+        "build",
+        "--nologo"
+      ],
+      "purpose": "Build (dotnet)"
+    },
+    {
+      "executable": "dotnet",
+      "args": [
+        "test",
+        "--nologo"
+      ],
+      "purpose": "Test (dotnet)"
+    }
+  ],
+  "rollback": [
+    "git revert this task\u0027s commit(s) rather than editing history.",
+    "If a database migration was applied, roll it back before reverting code \u2014 never edit an already-applied migration in place."
+  ],
+  "definitionOfDone": [
+    "Done when \u0027Console Host\u0027 builds, is wired into the solution and its health check passes, with no feature behaviour added.",
+    "Every step in Implementation Steps is complete.",
+    "Every item in Tests passes.",
+    "The repository\u0027s standard build and test commands (see Commands) are green.",
+    "No unresolved \u0027to be decided\u0027 marker remains anywhere this task touched.",
+    "This task\u0027s checkpointUpdate has been applied to execution-state.json."
+  ],
+  "checkpointUpdate": {
+    "targetFile": "07-agent/execution-state.json",
+    "updatedFields": [
+      "tasks[].status",
+      "tasks[].completedAt",
+      "nextSafeAction"
+    ],
+    "strategy": "Set this task\u0027s status to \u0027completed\u0027 and record completedAt, then recompute nextSafeAction as the first remaining not_started task whose dependsOn are all completed."
+  },
+  "escalateIf": [
+    "Completing this task\u0027s Outcome would require an architecture, data-model, or public-contract choice not already recorded in the Solution Blueprint \u2014 stop and ask a human rather than deciding it yourself.",
+    "A required credential, access grant, or environment value is missing.",
+    "The repository\u0027s actual current state no longer matches this task\u0027s pinned baseline (see START_HERE.md\u0027s baseline-drift reconciliation guidance).",
+    "A required human approval workflow or sign-off checkpoint is absent or bypassed.",
+    "Data residency or geographic isolation boundaries would be violated."
+  ]
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommendation Document</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Recommendation Document</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E01-calculator</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 09:38:52Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h2>1. Executive Summary</h2>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Recommended concept</td>
+        <td>traditional_software</td>
+      </tr>
+      <tr>
+        <td>Software required</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>AI required</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Approval status</td>
+        <td>Approved</td>
+      </tr>
+      <tr>
+        <td>Confidence</td>
+        <td>High</td>
+      </tr>
+    </table>
+    <h2>2. Rationale</h2>
+    <p>The proposed solution of a command-line calculator is categorized as &#39;traditional_software&#39; because it directly addresses the arithmetic errors in invoice totals through deterministic logic. While a &#39;rules_engine&#39; could also enforce arithmetic rules, it would not provide the same level of user control and simplicity that a dedicated calculator offers. The complexity of implementing a rules engine for this specific use case, where the primary need is accurate arithmetic evaluation, does not justify its use. The traditional software approach ensures that the team can input calculations directly and receive immediate feedback, which is essential for their daily operations.</p>
+    <h2>3. Expected Business Value</h2>
+    <p>The solution is expected to reduce rework time from 30 minutes per incorrect total to near zero, saving approximately 6 engineer-hours a week across the team, which translates to about 300 hours a year. This is based on the current error rate of 5% leading to significant rework.</p>
+    <h2>4. Data Requirements</h2>
+    <p>The calculator will require input in the form of arithmetic expressions entered via the terminal. Outputs will be the evaluated results of these expressions. The local SQLite database will store the last 10 calculations, requiring a simple schema with fields for expression, result, and timestamp. Latency should be near real-time, with minimal delay for calculations.</p>
+    <h2>5. Constraints</h2>
+    <p>The solution must run locally on each analyst&#39;s laptop without requiring network access or external services. It must also comply with the team&#39;s existing workflow, which relies on terminal usage.</p>
+    <h2>6. Assumptions</h2>
+    <p>It is assumed that the finance operations team will consistently use the calculator for all invoice total checks and that they will not revert to manual methods. It is also assumed that the tool will be maintained with updates as needed, without significant changes to its core functionality.</p>
+    <h2>7. Evidence Reference</h2>
+    <p>The recommendation is supported by the business problem description, which highlights the need for a reliable calculator to reduce errors and rework time. The proposed solution&#39;s feasibility and expected benefits are detailed in the project data.</p>
+    <h2>8. Alternative Concepts</h2>
+    <ul><li>rules_engine</li></ul>
+    <h2>9. Hybrid Components</h2>
+    <p>_None captured._</p>
+    <h2>10. Major Risks</h2>
+    <ul><li>Floating-point rounding could produce incorrect results if not handled with decimal arithmetic.</li></ul>
+    <ul><li>Malformed expressions could crash the tool instead of providing a clear error message.</li></ul>
+    <ul><li>The local history database could become corrupted or edited manually, leading to inaccurate records.</li></ul>
+    <h2>11. Review Guidance</h2>
+    <ul><li>Confirm recommendation alignment with business objectives before approval.</li></ul>
+    <ul><li>Validate data, risk, and cost assumptions before delivery planning.</li></ul>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>
