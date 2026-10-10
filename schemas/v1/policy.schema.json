@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/main/schemas/v1/policy.schema.json",
+  "title": "ExecutionPolicy",
+  "description": "Universal Delivery Pack Specification v1.0 Agent Execution & Security Policy Schema.",
+  "type": "object",
+  "required": [
+    "specVersion",
+    "policyId",
+    "governanceMode",
+    "prohibitedOperations",
+    "scopeBoundaries",
+    "humanApprovalRequired"
+  ],
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Specification version."
+    },
+    "policyId": {
+      "type": "string",
+      "description": "Unique identifier for this policy profile."
+    },
+    "governanceMode": {
+      "type": "string",
+      "enum": ["Permissive", "Standard", "Strict", "Regulated"],
+      "description": "Intensity level of governance enforcement."
+    },
+    "commercialBoundaryRestricted": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, autonomous coding agents are strictly prohibited from accessing 08-commercial files."
+    },
+    "prohibitedOperations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Actions forbidden to the coding agent (e.g. git push --force, altering auth schemas, deleting databases)."
+    },
+    "scopeBoundaries": {
+      "type": "object",
+      "required": ["workspaceOnly", "maxFilesModifiedPerTask"],
+      "properties": {
+        "workspaceOnly": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether file access is strictly confined within project workspace root."
+        },
+        "maxFilesModifiedPerTask": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 50,
+          "description": "Maximum allowed modified files per atomic task."
+        },
+        "allowedPathPrefixes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Explicit path prefixes permitted for file creation or modification."
+        }
+      }
+    },
+    "toolchainRestrictions": {
+      "type": "object",
+      "properties": {
+        "allowedExecutables": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Explicit executable names permitted for process spawning."
+        },
+        "shellInterpolationProhibited": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mandates argument-array process execution."
+        },
+        "networkAccessAllowed": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether agent processes may make external network requests."
+        }
+      }
+    },
+    "humanApprovalRequired": {
+      "type": "object",
+      "required": ["onTaskCompletion", "onDestructiveOperation", "onEscalation"],
+      "properties": {
+        "onTaskCompletion": { "type": "boolean" },
+        "onDestructiveOperation": { "type": "boolean" },
+        "onEscalation": { "type": "boolean" }
+      }
+    }
+  }
+}

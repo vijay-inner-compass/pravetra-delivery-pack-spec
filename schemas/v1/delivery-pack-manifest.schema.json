@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/main/schemas/v1/delivery-pack-manifest.schema.json",
+  "title": "UniversalDeliveryPackManifest",
+  "description": "Universal Delivery Pack Specification v1.0 Manifest Protocol Envelope.",
+  "type": "object",
+  "required": [
+    "specVersion",
+    "packId",
+    "createdAt",
+    "generator",
+    "conformanceLevel",
+    "integrity",
+    "capabilities",
+    "tasks",
+    "sections"
+  ],
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Semantic specification version of the Delivery Pack protocol standard."
+    },
+    "packId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$",
+      "description": "Unique Delivery Pack identifier chosen by the generator: letters, digits, '.', '_' and '-' only (e.g. DP-2026-001, or <generator>-<project id>-v<pack version>)."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of pack generation."
+    },
+    "generator": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string", "description": "Name of generating platform or CLI." },
+        "version": { "type": "string", "description": "Version of generating platform or CLI." },
+        "url": { "type": "string", "description": "Website or documentation URL of generator." }
+      }
+    },
+    "conformanceLevel": {
+      "type": "string",
+      "enum": [
+        "DeliveryPack.Core",
+        "DeliveryPack.Execution",
+        "DeliveryPack.Governance",
+        "DeliveryPack.Full"
+      ],
+      "description": "Standard conformance profile declared by this Delivery Pack."
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["algorithm", "hash"],
+      "properties": {
+        "algorithm": { "type": "string", "enum": ["sha256", "sha512"] },
+        "hash": {
+          "type": "string",
+          "pattern": "^([a-fA-F0-9]{64}|[a-fA-F0-9]{128})$",
+          "description": "Lowercase-hex digest (64 characters for sha256, 128 for sha512) of the defined integrity file list; see SPECIFICATION.md section 3.1 for the exact bytes."
+        },
+        "signatures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["keyId", "signature"],
+            "properties": {
+              "keyId": { "type": "string" },
+              "signature": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "Execution capabilities required or supported (e.g., worktree-isolation, multi-agent-review, docker-sandbox)."
+    },
+    "policies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "Governance or agent policies enforced by this pack."
+    },
+    "tasks": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^TASK-\\d{3,}(\\.\\d+)?$" },
+      "uniqueItems": true,
+      "description": "Ordered array of task IDs included in the delivery pack."
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "List of core architecture and decision artifacts produced."
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["section", "files"],
+        "properties": {
+          "section": {
+            "type": "string",
+            "pattern": "^\\d{2}-[a-z]+$"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(?!.*\\.\\.)(?!/)(?![a-zA-Z]:)[^\\0\\\\]+$",
+              "description": "File path relative to the section folder; no '..', no leading '/', no drive letter, no backslash."
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}

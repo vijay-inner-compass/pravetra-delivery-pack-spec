@@ -1,0 +1,83 @@
+{
+  "taskId": "TASK-001",
+  "title": "Initialize Repository Solution Structure",
+  "outcome": "Compile-clean solution file and core class libraries",
+  "status": "NotStarted",
+  "sequence": 1,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "dependsOn": [],
+  "unlocks": [
+    "TASK-002"
+  ],
+  "targetScope": [
+    {
+      "path": "Makefile",
+      "status": "Proposed",
+      "note": "Main solution file"
+    },
+    {
+      "path": "src/core/__init__.py",
+      "status": "Proposed",
+      "note": "Core class library"
+    }
+  ],
+  "inputs": [
+    "01-baseline/baseline-pin.md",
+    "03-architecture/architecture-summary.md"
+  ],
+  "expectedOutputs": [
+    "Makefile",
+    "src/core/__init__.py"
+  ],
+  "allowedCapabilities": [
+    "filesystem:read",
+    "filesystem:write",
+    "process:run"
+  ],
+  "allowedChanges": [
+    "Create Makefile",
+    "Create src/core package"
+  ],
+  "prohibitedChanges": [
+    "Do not add external package dependencies without approval",
+    "Do not touch 08-commercial files"
+  ],
+  "implementationSteps": [
+    "Run make init",
+    "Create the src/core package",
+    "Register the package in the Makefile",
+    "Run make build"
+  ],
+  "qualityAndSecurity": [
+    "Zero compiler warnings",
+    "TreatWarningsAsErrors enabled"
+  ],
+  "securityConstraints": [
+    "No hard-coded secrets or credentials"
+  ],
+  "tests": [
+    "Project builds cleanly with make build"
+  ],
+  "commands": [
+    {
+      "executable": "make",
+      "args": [
+        "build"
+      ],
+      "purpose": "Verify clean compilation",
+      "workingDirectory": "."
+    }
+  ],
+  "rollback": [
+    "Delete created files and git reset --hard"
+  ],
+  "definitionOfDone": [
+    "Makefile exists and the project builds with 0 errors",
+    "git status shows only allowed target files"
+  ],
+  "escalateIf": [
+    "Toolchain version mismatch",
+    "Permission denied writing to workspace"
+  ]
+}

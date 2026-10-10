@@ -1,0 +1,49 @@
+{
+  "taskId": "TASK-002",
+  "title": "Add the Core domain model",
+  "outcome": "A Core class library with the first domain entity and a passing unit test",
+  "status": "NotStarted",
+  "sequence": 2,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "dependsOn": [
+    "TASK-001"
+  ],
+  "unlocks": [],
+  "targetScope": [
+    {
+      "path": "src/core/customer.py",
+      "status": "Proposed",
+      "note": "First domain entity"
+    }
+  ],
+  "allowedChanges": [
+    "Create src/core/customer.py"
+  ],
+  "prohibitedChanges": [
+    "Do not add external package dependencies without approval"
+  ],
+  "implementationSteps": [
+    "Create the Customer entity",
+    "Add a unit test for it",
+    "Run make test"
+  ],
+  "tests": [
+    "Customer entity test passes"
+  ],
+  "commands": [
+    {
+      "executable": "make",
+      "args": [
+        "test"
+      ],
+      "purpose": "Run the unit tests"
+    }
+  ],
+  "definitionOfDone": [
+    "make test passes with 0 failures"
+  ],
+  "escalateIf": [
+    "A new dependency seems necessary"
+  ]
+}

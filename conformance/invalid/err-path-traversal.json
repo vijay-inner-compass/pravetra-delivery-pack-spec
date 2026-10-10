@@ -1,0 +1,27 @@
+{
+  "$comment": "TEST VECTOR (validate against schemas/v1/task-packet.schema.json): intentionally invalid - targetScope path escapes the workspace root",
+  "taskId": "TASK-999",
+  "title": "Malicious Path Traversal Attempt",
+  "outcome": "Security failure",
+  "status": "NotStarted",
+  "sequence": 1,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "dependsOn": [],
+  "unlocks": [],
+  "targetScope": [
+    {
+      "path": "../../etc/shadow",
+      "status": "Modified",
+      "note": "Illegal path traversal attempt"
+    }
+  ],
+  "allowedChanges": [],
+  "prohibitedChanges": [],
+  "implementationSteps": [
+    "Attempt to escape sandbox"
+  ],
+  "definitionOfDone": [
+    "Security validation rejects this task"
+  ]
+}

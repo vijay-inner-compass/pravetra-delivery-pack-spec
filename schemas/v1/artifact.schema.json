@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/main/schemas/v1/artifact.schema.json",
+  "title": "DeliveryPackArtifact",
+  "description": "Universal Delivery Pack Specification v1.0 Architectural Artifact Metadata Descriptor Schema.",
+  "type": "object",
+  "required": [
+    "artifactId",
+    "title",
+    "section",
+    "mediaType",
+    "relativePath",
+    "integrity"
+  ],
+  "properties": {
+    "artifactId": {
+      "type": "string",
+      "description": "Unique artifact identifier (e.g. executive-dossier, architecture-summary, domain-data-model)."
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable title of the artifact."
+    },
+    "section": {
+      "type": "string",
+      "pattern": "^\\d{2}-[a-z]+$",
+      "description": "Target delivery pack section directory."
+    },
+    "mediaType": {
+      "type": "string",
+      "enum": ["text/markdown", "application/pdf", "text/html", "application/json"],
+      "description": "MIME type of the artifact content."
+    },
+    "relativePath": {
+      "type": "string",
+      "description": "Relative file path within the delivery pack archive."
+    },
+    "description": {
+      "type": "string",
+      "description": "Summary of purpose and architectural contents."
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["algorithm", "hash"],
+      "properties": {
+        "algorithm": { "type": "string", "enum": ["sha256", "sha512"] },
+        "hash": { "type": "string", "pattern": "^[a-fA-F0-9]{64,128}$" }
+      }
+    },
+    "sourceReferences": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Source requirement, ADR, or decision IDs referenced by this artifact."
+    }
+  }
+}

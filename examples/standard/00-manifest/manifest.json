@@ -1,0 +1,72 @@
+{
+  "specVersion": "1.0.0",
+  "packId": "example-standard-001",
+  "createdAt": "2026-10-06T18:00:00Z",
+  "generator": {
+    "name": "ExampleGenerator",
+    "version": "1.0.0",
+    "url": "https://example.com/example-generator"
+  },
+  "conformanceLevel": "DeliveryPack.Execution",
+  "integrity": {
+    "algorithm": "sha256",
+    "hash": "a54634a933b0f19931f447d7cb8748fc88d15bb294e0c748bb6849e5b31179f0"
+  },
+  "capabilities": [
+    "worktree-isolation"
+  ],
+  "policies": [
+    "strict-scope-confinement",
+    "no-bypass-gates"
+  ],
+  "tasks": [
+    "TASK-001",
+    "TASK-002"
+  ],
+  "sections": [
+    {
+      "section": "00-manifest",
+      "files": [
+        "MANIFEST.md",
+        "manifest.json"
+      ]
+    },
+    {
+      "section": "01-baseline",
+      "files": [
+        "baseline-pin.md"
+      ]
+    },
+    {
+      "section": "02-context",
+      "files": [
+        "context-summary.md",
+        "requirements.md"
+      ]
+    },
+    {
+      "section": "03-architecture",
+      "files": [
+        "architecture-summary.md"
+      ]
+    },
+    {
+      "section": "04-delivery",
+      "files": [
+        "TASK-001.json",
+        "TASK-001.md",
+        "TASK-002.json",
+        "TASK-002.md",
+        "task-list.md"
+      ]
+    },
+    {
+      "section": "07-agent",
+      "files": [
+        "AGENTS.md",
+        "START_HERE.md",
+        "execution-state.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "specVersion": "1.0.0",
+  "deliveryPackVersion": 1,
+  "pinnedRepositoryLabel": "main@00000000",
+  "extensions": {
+    "examplegen": {
+      "blueprintId": "bp_test_vector_001",
+      "blueprintVersion": 1
+    }
+  },
+  "tasks": [
+    {
+      "taskId": "TASK-001",
+      "title": "Initialize Repository Solution Structure",
+      "status": "NotStarted",
+      "dependsOn": [],
+      "startedAt": null,
+      "completedAt": null,
+      "executionAgent": null,
+      "worktreePath": null,
+      "exitCode": null
+    },
+    {
+      "taskId": "TASK-002",
+      "title": "Add the Core domain model",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ],
+      "startedAt": null,
+      "completedAt": null,
+      "executionAgent": null,
+      "worktreePath": null,
+      "exitCode": null
+    }
+  ],
+  "nextSafeAction": "Start TASK-001: Initialize Repository Solution Structure",
+  "reconciliationGuidance": "Verify baseline git status before invoking agent."
+}

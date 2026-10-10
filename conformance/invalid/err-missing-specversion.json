@@ -1,0 +1,17 @@
+{
+  "$comment": "TEST VECTOR (validate against schemas/v1/delivery-pack-manifest.schema.json): intentionally invalid - missing required specVersion",
+  "packId": "DP-2026-999",
+  "createdAt": "2026-10-06T18:00:00Z",
+  "generator": {
+    "name": "TestHarness",
+    "version": "1.0.0"
+  },
+  "conformanceLevel": "DeliveryPack.Core",
+  "integrity": {
+    "algorithm": "sha256",
+    "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "capabilities": [],
+  "tasks": [],
+  "sections": []
+}

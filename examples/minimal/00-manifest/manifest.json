@@ -1,0 +1,46 @@
+{
+  "specVersion": "1.0.0",
+  "packId": "DP-2026-001",
+  "createdAt": "2026-10-06T18:00:00Z",
+  "generator": {
+    "name": "ExampleGenerator",
+    "version": "1.0.0",
+    "url": "https://example.com/example-generator"
+  },
+  "conformanceLevel": "DeliveryPack.Core",
+  "integrity": {
+    "algorithm": "sha256",
+    "hash": "c4739af1f1bb0b5b9154a57a16a25d3efe0c0729caac09b38e4df6dacaf8882a"
+  },
+  "capabilities": [
+    "architecture-viewer"
+  ],
+  "tasks": [],
+  "sections": [
+    {
+      "section": "00-manifest",
+      "files": [
+        "manifest.json"
+      ]
+    },
+    {
+      "section": "01-baseline",
+      "files": [
+        "baseline-pin.md"
+      ]
+    },
+    {
+      "section": "02-context",
+      "files": [
+        "context-summary.md",
+        "requirements.md"
+      ]
+    },
+    {
+      "section": "03-architecture",
+      "files": [
+        "architecture-summary.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "specVersion": "1.0.0",
+  "packId": "example-governed-001",
+  "createdAt": "2026-10-06T18:00:00Z",
+  "generator": {
+    "name": "ExampleGenerator",
+    "version": "1.0.0",
+    "url": "https://example.com/example-generator"
+  },
+  "conformanceLevel": "DeliveryPack.Governance",
+  "integrity": {
+    "algorithm": "sha256",
+    "hash": "4fde23246cb207ab36ca5023b2c4e913b4b9bceb8259257c043cc09da4d754c0"
+  },
+  "capabilities": [
+    "worktree-isolation"
+  ],
+  "policies": [
+    "strict-scope-confinement",
+    "no-bypass-gates"
+  ],
+  "tasks": [
+    "TASK-001",
+    "TASK-002"
+  ],
+  "sections": [
+    {
+      "section": "00-manifest",
+      "files": [
+        "MANIFEST.md",
+        "manifest.json"
+      ]
+    },
+    {
+      "section": "01-baseline",
+      "files": [
+        "baseline-pin.md"
+      ]
+    },
+    {
+      "section": "02-context",
+      "files": [
+        "context-summary.md",
+        "requirements.md"
+      ]
+    },
+    {
+      "section": "03-architecture",
+      "files": [
+        "architecture-summary.md"
+      ]
+    },
+    {
+      "section": "04-delivery",
+      "files": [
+        "TASK-001.json",
+        "TASK-001.md",
+        "TASK-002.json",
+        "TASK-002.md",
+        "implementation-readiness-report.md",
+        "task-list.md"
+      ]
+    },
+    {
+      "section": "05-quality",
+      "files": [
+        "quality-and-security.md"
+      ]
+    },
+    {
+      "section": "06-ops",
+      "files": [
+        "deployment-and-rollback.md"
+      ]
+    },
+    {
+      "section": "07-agent",
+      "files": [
+        "AGENTS.md",
+        "START_HERE.md",
+        "execution-state.json"
+      ]
+    }
+  ]
+}

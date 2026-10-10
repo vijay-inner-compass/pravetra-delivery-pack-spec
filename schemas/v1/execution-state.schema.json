@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/main/schemas/v1/execution-state.schema.json",
+  "title": "ExecutionState",
+  "description": "Universal Delivery Pack Specification v1.0 execution checkpoint state machine.",
+  "type": "object",
+  "required": [
+    "specVersion",
+    "deliveryPackVersion",
+    "pinnedRepositoryLabel",
+    "tasks"
+  ],
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Semantic specification version."
+    },
+    "deliveryPackVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Delivery Pack release version number."
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Generator-specific data, keyed by vendor. Consumers MUST ignore keys they do not know. A generator namespaces its own keys (for example extensions.<generator>.blueprintId); no key is defined by this specification."
+    },
+    "pinnedRepositoryLabel": {
+      "type": "string",
+      "description": "Pinned commit or baseline descriptor."
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["taskId", "title", "status", "dependsOn"],
+        "properties": {
+          "taskId": { "type": "string", "pattern": "^TASK-\\d{3,}(\\.\\d+)?$" },
+          "parentTaskId": {
+            "type": ["string", "null"],
+            "pattern": "^TASK-\\d{3,}(\\.\\d+)?$",
+            "description": "Optional (specification 1.1.0). The task this one is a sub-task of; absent or null for a primary task."
+          },
+          "title": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["NotStarted", "InProgress", "Completed", "Blocked", "Cancelled"]
+          },
+          "dependsOn": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^TASK-\\d{3,}(\\.\\d+)?$" },
+            "uniqueItems": true
+          },
+          "startedAt": { "type": ["string", "null"], "format": "date-time" },
+          "completedAt": { "type": ["string", "null"], "format": "date-time" },
+          "sourceCommit": { "type": ["string", "null"], "pattern": "^[0-9a-fA-F]{7,64}$" },
+          "executionAgent": { "type": ["string", "null"] },
+          "worktreePath": { "type": ["string", "null"] },
+          "exitCode": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "nextSafeAction": {
+      "type": ["string", "null"],
+      "description": "Recommended next action based on dependency ordering."
+    },
+    "reconciliationGuidance": {
+      "type": "string",
+      "description": "Instructions for reconciling drift between disk state and execution state."
+    }
+  }
+}
