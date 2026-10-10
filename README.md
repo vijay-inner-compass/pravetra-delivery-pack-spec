@@ -5,6 +5,8 @@
 **Status**: Draft v1.1  
 **Canonical Repository**: [https://github.com/vijay-inner-compass/pravetra-delivery-pack-spec](https://github.com/vijay-inner-compass/pravetra-delivery-pack-spec)  
 
+> **Review status.** This is a draft. It has been reviewed only by its maintainer. It has **not** had an independent legal review or an independent security review, and nothing here is legal advice or a security certification. Conformance claims should not depend on this review. Independent review comments are welcome (see [CONTRIBUTING.md](CONTRIBUTING.md) and, for security issues, [SECURITY.md](SECURITY.md)).
+
 ---
 
 ## 1. Overview & Purpose
