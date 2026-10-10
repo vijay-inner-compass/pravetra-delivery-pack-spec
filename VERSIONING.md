@@ -56,8 +56,8 @@ schemas/
 └── v2/ (reserved for future breaking releases)
 ```
 
-Schema IDs use canonical URI prefixes:
-`https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/main/schemas/v1/<schema-name>.schema.json`
+Schema IDs use canonical URI prefixes, pinned to the release tag (the URL of a published schema never changes):
+`https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/v1.1.0/schemas/v1/<schema-name>.schema.json`
 
 Published schemas within a `MAJOR` series are immutable. In-place breaking schema mutations are strictly prohibited.
 

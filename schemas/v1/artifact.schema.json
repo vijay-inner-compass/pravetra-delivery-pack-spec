@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/main/schemas/v1/artifact.schema.json",
+  "$id": "https://raw.githubusercontent.com/vijay-inner-compass/pravetra-delivery-pack-spec/v1.1.0/schemas/v1/artifact.schema.json",
   "title": "DeliveryPackArtifact",
   "description": "Universal Delivery Pack Specification v1.0 Architectural Artifact Metadata Descriptor Schema.",
   "type": "object",
