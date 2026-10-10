@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gate 1 Summary</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Gate 1 Summary</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E03-focus-ledger</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 11:34:13Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h2>1. Executive Summary</h2>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Overall readiness</td>
+        <td>Ready for Gate 1 decision</td>
+      </tr>
+    </table>
+    <h2>2. Readiness Assessment</h2>
+    <table>
+      <tr>
+        <th>Element</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>problem</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>users</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>current state</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>alternatives</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>AI necessity</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>solution direction</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>build/buy options</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>cost</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>benefit</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>risks</td>
+        <td>Satisfied</td>
+      </tr>
+    </table>
+    <h2>3. Decision Record</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Outcome</td>
+        <td>Proceed</td>
+      </tr>
+      <tr>
+        <td>Approved by</td>
+        <td>approver@example.com</td>
+      </tr>
+      <tr>
+        <td>Recorded</td>
+        <td>2026-10-09 11:00:56Z</td>
+      </tr>
+      <tr>
+        <td>Rationale</td>
+        <td>Idea validated, proceeding to solution design. Scripted approval by demo run 93bb54aa3d5947bb928c750e44219e2a.</td>
+      </tr>
+    </table>
+    <h2>4. Open Actions</h2>
+    <ul><li>No open readiness gaps identified in the generated checklist.</li></ul>
+    <h2>5. Distribution Notes</h2>
+    <ul><li>Suitable for project governance review after stakeholder validation.</li></ul>
+    <ul><li>Regenerate before sign-off if IdeaForge inputs change.</li></ul>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

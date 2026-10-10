@@ -1,0 +1,188 @@
+{
+  "specVersion": "1.1.0",
+  "packId": "pravetra-4bc4b4c0c17940228158022bba3aeb53-v2",
+  "createdAt": "2026-10-09T11:48:57Z",
+  "generator": {
+    "name": "Pravetra",
+    "version": "1.0.0"
+  },
+  "conformanceLevel": "DeliveryPack.Execution",
+  "integrity": {
+    "algorithm": "sha256",
+    "hash": "31fd32cf6537af9976d0b8d138ca00a0e9b9323702bd5f84b687ccbf3655cfb3"
+  },
+  "capabilities": [],
+  "tasks": [
+    "TASK-001",
+    "TASK-001.1",
+    "TASK-001.2",
+    "TASK-001.3",
+    "TASK-001.4",
+    "TASK-001.5",
+    "TASK-002",
+    "TASK-002.1",
+    "TASK-002.2",
+    "TASK-002.3",
+    "TASK-002.4",
+    "TASK-002.5",
+    "TASK-002.6",
+    "TASK-002.7",
+    "TASK-002.8",
+    "TASK-003",
+    "TASK-003.1",
+    "TASK-003.2",
+    "TASK-004",
+    "TASK-004.1",
+    "TASK-004.2",
+    "TASK-004.3",
+    "TASK-004.4"
+  ],
+  "sections": [
+    {
+      "section": "00-manifest",
+      "files": [
+        "MANIFEST.md",
+        "executive-dossier.html",
+        "executive-dossier.md",
+        "manifest.json"
+      ]
+    },
+    {
+      "section": "01-baseline",
+      "files": [
+        "baseline-pin.md"
+      ]
+    },
+    {
+      "section": "02-context",
+      "files": [
+        "context-summary.md",
+        "gate1-summary.html",
+        "gate1-summary.md",
+        "gate2-report.html",
+        "gate2-report.md",
+        "recommendation-document.html",
+        "recommendation-document.md",
+        "requirements.html",
+        "requirements.md"
+      ]
+    },
+    {
+      "section": "03-architecture",
+      "files": [
+        "architecture-diagram.html",
+        "architecture-diagram.md",
+        "architecture-summary.md",
+        "domain-data-model.html",
+        "domain-data-model.md"
+      ]
+    },
+    {
+      "section": "04-delivery",
+      "files": [
+        "TASK-001.1.json",
+        "TASK-001.1.md",
+        "TASK-001.2.json",
+        "TASK-001.2.md",
+        "TASK-001.3.json",
+        "TASK-001.3.md",
+        "TASK-001.4.json",
+        "TASK-001.4.md",
+        "TASK-001.5.json",
+        "TASK-001.5.md",
+        "TASK-001.json",
+        "TASK-001.md",
+        "TASK-002.1.json",
+        "TASK-002.1.md",
+        "TASK-002.2.json",
+        "TASK-002.2.md",
+        "TASK-002.3.json",
+        "TASK-002.3.md",
+        "TASK-002.4.json",
+        "TASK-002.4.md",
+        "TASK-002.5.json",
+        "TASK-002.5.md",
+        "TASK-002.6.json",
+        "TASK-002.6.md",
+        "TASK-002.7.json",
+        "TASK-002.7.md",
+        "TASK-002.8.json",
+        "TASK-002.8.md",
+        "TASK-002.json",
+        "TASK-002.md",
+        "TASK-003.1.json",
+        "TASK-003.1.md",
+        "TASK-003.2.json",
+        "TASK-003.2.md",
+        "TASK-003.json",
+        "TASK-003.md",
+        "TASK-004.1.json",
+        "TASK-004.1.md",
+        "TASK-004.2.json",
+        "TASK-004.2.md",
+        "TASK-004.3.json",
+        "TASK-004.3.md",
+        "TASK-004.4.json",
+        "TASK-004.4.md",
+        "TASK-004.json",
+        "TASK-004.md",
+        "implementation-readiness-report.html",
+        "implementation-readiness-report.md",
+        "task-list.md"
+      ]
+    },
+    {
+      "section": "05-quality",
+      "files": [
+        "quality-and-security.md"
+      ]
+    },
+    {
+      "section": "06-ops",
+      "files": [
+        "deployment-and-rollback.md"
+      ]
+    },
+    {
+      "section": "07-agent",
+      "files": [
+        ".agents/rules/engineering.md",
+        ".claude/skills/architecture-boundaries.md",
+        ".claude/skills/cicd-branching.md",
+        ".claude/skills/coding-conventions.md",
+        ".claude/skills/data-migrations.md",
+        ".claude/skills/documentation-traceability.md",
+        ".claude/skills/domain-terminology.md",
+        ".claude/skills/human-approval-prohibited-actions.md",
+        ".claude/skills/observability.md",
+        ".claude/skills/security-secrets.md",
+        ".claude/skills/testing-validation.md",
+        ".clinerules",
+        ".config/amp/AGENTS.md",
+        ".config/opencode/AGENTS.md",
+        ".config/zed/AGENTS.md",
+        ".continue/rules/development.md",
+        ".cursor/rules/pravetra.mdc",
+        ".devin/rules/cascade.md",
+        ".factory/AGENTS.md",
+        ".github/copilot-instructions.md",
+        ".junie/AGENTS.md",
+        ".kilo/rules/standards.md",
+        ".kiro/steering/architecture.md",
+        ".roo/rules/code.md",
+        ".warp/rules/engineering.md",
+        "AGENTS.md",
+        "AGENT_POLICY.md",
+        "CLAUDE.md",
+        "COMMON_RULES.md",
+        "CONVENTIONS.md",
+        "GEMINI.md",
+        "START_HERE.md",
+        "coding-agent-instructions-guide.md",
+        "execution-state.json",
+        "implementation-prompt.md",
+        "replit.md"
+      ]
+    }
+  ]
+}

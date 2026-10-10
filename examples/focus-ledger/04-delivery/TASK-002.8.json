@@ -1,0 +1,180 @@
+{
+  "taskId": "TASK-002.8",
+  "parentTaskId": "TASK-002",
+  "title": "Access historical session data (\u002B1 related Should requirement)",
+  "outcome": "\u0027Session Tracking\u0027 delivers: The application must allow users to access their historical session data for as long as they keep it. The application must notify users of any unsaved session data when they attempt to close the application. Done when Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The application must allow for data retention of at least 5 years, enabling users to access historical session data; Given valid input, when the function described by this requirement is used, then the system does what it states: The application must notify users of any unsaved session data when they attempt to close the application; Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.",
+  "status": "NotStarted",
+  "sequence": 15,
+  "parallelSafe": false,
+  "humanApprovalRequired": true,
+  "sourceRefs": [
+    {
+      "entityType": "BlueprintComponent",
+      "entityId": "10abc4b7178f40a8aa5248ba6e52061d",
+      "name": "Session Tracking"
+    },
+    {
+      "entityType": "Requirement",
+      "entityId": "a80fbd1ef94146cb91db0881301a782e",
+      "name": "[Should] Access historical session data for as long as they keep it"
+    },
+    {
+      "entityType": "Requirement",
+      "entityId": "847d4406d0f94002b149721df290b3f2",
+      "name": "[Should] Notify users of any unsaved session data"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "04e6e2e4e0b04159aa1067484e60d8aa",
+      "name": "Technology: C# on .NET 10 with the Avalonia UI desktop toolkit"
+    },
+    {
+      "entityType": "TechnologyDecision",
+      "entityId": "8b91513dce6646c79aa70883f3c97f93",
+      "name": "Technology: an embedded SQLite database file, one per user, on the user machine, accessed through Microsoft.Data.Sqlite"
+    }
+  ],
+  "baseline": {
+    "blueprintId": "a3f05f0f256c49d4836120beb3cbc4ec",
+    "blueprintVersion": 2,
+    "pinnedRepositoryLabel": "No existing-system baseline \u2014 greenfield project. Every target path below is Proposed, not discovered."
+  },
+  "dependsOn": [
+    "TASK-002"
+  ],
+  "unlocks": [],
+  "targetScope": [
+    {
+      "path": "(proposed) sessiontracking/",
+      "status": "Proposed",
+      "note": "No baseline exists for this path \u2014 treat it as a starting suggestion, not a fixed location."
+    }
+  ],
+  "allowedChanges": [
+    "Add, modify, or remove files within this task\u0027s target scope (sessiontracking/) that this requirement needs.",
+    "Add unit and integration tests under tests/ for this requirement of \u0027Session Tracking\u0027.",
+    "Update service registration in the composition root / dependency injection module where the behaviour needs it."
+  ],
+  "prohibitedChanges": [
+    "Implementing a requirement that belongs to another sub-task of TASK-002 or to another component\u0027s task.",
+    "Modifying another task\u0027s target scope without an explicit, recorded dependency.",
+    "Introducing an unapproved external package, dependency, or architecture style not recorded in the Solution Blueprint.",
+    "Committing hardcoded secrets, API keys, credentials, or environment-specific values.",
+    "Altering or circumventing locked user decisions and governance constraints.",
+    "Persisting unmasked PII, credentials, or sensitive data in server logs or unencrypted data stores.",
+    "Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Do not substitute, replace, or alter the locked decision for Technology (C# on .NET 10 with the Avalonia UI desktop toolkit).",
+    "Do not substitute, replace, or alter the locked decision for Technology (an embedded SQLite database file, one per user, on the user machine, accessed through Microsoft.Data.Sqlite).",
+    "Do not substitute, replace, or alter the locked decision for Technology (CSV export).",
+    "Out of scope (build nothing of): the other sub-tasks of this component - TASK-002.1 (Accurately track billable hours); TASK-002.2 (Start a focus session by selecting a client and entering); TASK-002.3 (Prompt the user); TASK-002.4 (Timer updates in real-time); TASK-002.5 (Start and record focus sessions); TASK-002.6 (Manually stop a focus session and record the end time); TASK-002.7 (Session data is backed up at least once a week to prevent).",
+    "Out of scope (build nothing of): the responsibilities of the other components - Local Encrypted Database, Timesheet and Export, Desktop Client."
+  ],
+  "currentStateEvidence": "Builds on the skeleton of \u0027Session Tracking\u0027 delivered by TASK-002. Greenfield component per Solution Blueprint. Target responsibilities:\n\u2022 Implement core domain logic and invariant validation for: Enable independent consultants and freelance developers to accurately track their billable hours, reducing under-billing by at least 4 hours per week, which translates to approximately $15,000 annually per consultant.; Provide users with a trustworthy weekly timesheet that can be generated in under 2 minutes.; The application must allow users to start a focus session by selecting a client and entering a one-line task description..\n\u2022 Validate command inputs and orchestrate state transitions.\n\u2022 Emit domain notifications and audit events upon state changes.",
+  "changeContract": "In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+  "contractChanges": [],
+  "implementationSteps": [
+    "Write the failing tests listed under \u0027Write first\u0027 in Tests (one per acceptance criterion, negative cases included) and run them to see them fail.",
+    "Confirm the skeleton from TASK-002 builds and its health check passes.",
+    "Implement: The application must allow users to access their historical session data for as long as they keep it.",
+    "Implement: The application must notify users of any unsaved session data when they attempt to close the application.",
+    "Follow the component\u0027s recorded responsibilities (see Current State Evidence) wherever they apply to this behaviour.",
+    "Align the component interface with its contract: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+    "Keep to the component\u0027s data design: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.",
+    "Run the new tests and the commands listed; every \u0027Write first\u0027 test must now pass.",
+    "Report: update the checkpoint (execution-state.json) naming the tests that prove each \u0027Done when\u0027 item, then stop.",
+    "Implement the failure behaviour the negative acceptance criteria describe: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log."
+  ],
+  "qualityAndSecurity": [
+    "Input validation at every file, clipboard and import boundary; encrypt data at rest as the data decision requires; no network trust boundary exists.",
+    "No secret or key hard-coded or stored beside the data \u2014 keep encryption keys in the operating-system key store (or derive them from user input), never in source, the database file or logs.",
+    "Clean architecture boundaries: adhere to separation of concerns and dependency inversion.",
+    "Data handling and retention specification: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.",
+    "API contract and security requirements: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.",
+    "Architecture decomposition boundary: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.",
+    "Data residency \u0026 lifecycle policy: The data entities are client names, task descriptions, session start and end times and notes entered by the user; they are created by the user in the app, are available and clean from the first session, and are owned by the user, with the schema versioned inside the app by migration scripts. Data quality is validated on entry (a session needs a client and a start time, overlapping sessions are fla\u2026",
+    "Sensitive data governance \u0026 tokenization: The data entities are client names, task descriptions, session start and end times and notes entered by the user; they are created by the user in the app, are available and clean from the first session, and are owned by the user, with the schema versioned inside the app by migration scripts. Data quality is validated on entry (a session needs a client and a start time, overlapping sessions are fla\u2026",
+    "Human oversight \u0026 approval requirements: The product lead is the Technical Decision Owner and also the Risk Owner who tracks and mitigates risks, the main one being data loss with no cloud copy. Evidence published for each release review is the test coverage report, the backup restore test result and the signed-installer verification, and the product lead approves each release and holds the veto. Exceptions and accepted risks are recorde\u2026",
+    "Security \u0026 encryption standard: There are no accounts: the user is the owner of the machine and the operating system login is the only identity, and no other process is granted access to the database key held in the secure store. Data is encrypted at rest with AES-256, never leaves the machine (the update check carries no user data, and installers and updates are code-signed), and there are no secrets to manage on a server. Clie\u2026",
+    "Applicable technology decision [04e6e2e4e0b04159aa1067484e60d8aa] Technology: C# on .NET 10 with the Avalonia UI desktop toolkit",
+    "Applicable technology decision [8b91513dce6646c79aa70883f3c97f93] Technology: an embedded SQLite database file, one per user, on the user machine, accessed through Microsoft.Data.Sqlite",
+    "Applicable technology decision [25a2ec018af149ccaab74f8fbf8fbeda] Technology: CSV export",
+    "Governance constraint (sensitive data): do not do the following - Persisting unmasked PII, credentials, or sensitive data in server logs or unencrypted data stores.",
+    "Governance constraint (human approval): do not do the following - Bypassing human approval or oversight checkpoints for irreversible or high-impact actions.",
+    "Must not contradict: Technology: C# on .NET 10 with the Avalonia UI desktop toolkit | Technology: an embedded SQLite database file, one per user, on the user machine, accessed through Microsoft.Data.Sqlite | Technology: CSV export",
+    "Non-functional target (The application must ensure that the timer updates in rea...): The application must ensure that the timer updates in real-time with a maximum latency of 1 second.",
+    "Non-functional target (The application must start and record focus sessions with...): The application must start and record focus sessions without a network connection, so the timer is available whenever the user\u0027s computer is on.",
+    "Non-functional target (The application must encrypt all stored data at rest usin...): The application must encrypt all stored data at rest using AES-256 encryption to protect sensitive client information.",
+    "Non-functional target (The application must allow users to access their historic...): The application must allow users to access their historical session data for as long as they keep it.",
+    "Non-functional target (The application must provide a backup and recovery mechan...): The application must provide a backup and recovery mechanism that allows users to restore their session data from an encrypted local backup file.",
+    "Non-functional target (The application must comply with GDPR regulations, allowi...): The application must comply with GDPR regulations, allowing users to delete their data upon request.",
+    "Non-functional target (The application must have a user interface that adheres t...): The application must have a user interface that adheres to accessibility standards, ensuring usability for all users.",
+    "Non-functional target (The application must ensure that the user interface is re...): The application must ensure that the user interface is responsive, with a maximum load time of 2 seconds for any screen.",
+    "Non-functional target (The application must ensure that session data is backed u...): The application must ensure that session data is backed up at least once a week to prevent data loss."
+  ],
+  "tests": [
+    "Write first (must fail before the implementation) - positive case: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The application must allow for data retention of at least 5 years, enabling users to access historical session data.",
+    "Write first (must fail before the implementation) - positive case: Given valid input, when the function described by this requirement is used, then the system does what it states: The application must notify users of any unsaved session data when they attempt to close the application.",
+    "Write first (must fail before the implementation) - negative case: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.",
+    "Negative scenario: Verify a corrupt or tampered database file, a malformed import and a missing key are rejected with a clear message and no data loss.",
+    "Boundary condition: Verify boundary thresholds, empty collections, and null state handling.",
+    "Full regression test suite remains 100% green - this task must not regress another component.",
+    "Acceptance (positive) for [Should] The application must allow users to access their historic...: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The application must allow for data retention of at least 5 years, enabling users to access historical session data.",
+    "Acceptance (positive) for [Should] The application must notify users of any unsaved session ...: Given valid input, when the function described by this requirement is used, then the system does what it states: The application must notify users of any unsaved session data when they attempt to close the application.",
+    "Acceptance (negative) for [Should] The application must notify users of any unsaved session ...: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log."
+  ],
+  "commands": [
+    {
+      "executable": "dotnet",
+      "args": [
+        "build",
+        "--nologo"
+      ],
+      "purpose": "Build (dotnet)"
+    },
+    {
+      "executable": "dotnet",
+      "args": [
+        "test",
+        "--nologo"
+      ],
+      "purpose": "Test (dotnet)"
+    }
+  ],
+  "rollback": [
+    "git revert this task\u0027s commit(s) rather than editing history.",
+    "If a database migration was applied, roll it back before reverting code \u2014 never edit an already-applied migration in place."
+  ],
+  "definitionOfDone": [
+    "Done when: Given the system is running under its normal conditions, when the quality target in this requirement is measured, then the result meets it and the measurement is kept as evidence: The application must allow for data retention of at least 5 years, enabling users to access historical session data.",
+    "Done when: Given valid input, when the function described by this requirement is used, then the system does what it states: The application must notify users of any unsaved session data when they attempt to close the application.",
+    "Done when: Given input that does not meet the conditions the requirement states, when it is submitted, then the system refuses it with a clear explanation and records the refusal in the audit log.",
+    "Every step in Implementation Steps is complete.",
+    "Every item in Tests passes.",
+    "The repository\u0027s standard build and test commands (see Commands) are green.",
+    "No unresolved \u0027to be decided\u0027 marker remains anywhere this task touched.",
+    "This task\u0027s checkpointUpdate has been applied to execution-state.json.",
+    "Every acceptance criterion listed in Tests has a passing test, and the checkpoint notes name the test that proves it."
+  ],
+  "reviewerChecklist": [
+    "Every \u0027Done when\u0027 item is met (3 listed in Definition of Done), each shown by a named test or check.",
+    "Every test listed under \u0027Write first\u0027 in Tests exists, failed before the change, and passes now.",
+    "The applicable decisions and constraints in Quality and Security are respected and nothing contradicts them.",
+    "The out-of-scope items in Prohibited Changes are untouched.",
+    "No unrelated changes: the diff stays inside the allowed paths and only this sub-task\u0027s behaviour changed."
+  ],
+  "checkpointUpdate": {
+    "targetFile": "07-agent/execution-state.json",
+    "updatedFields": [
+      "tasks[].status",
+      "tasks[].completedAt",
+      "nextSafeAction"
+    ],
+    "strategy": "Set this task\u0027s status to \u0027completed\u0027 and record completedAt, then recompute nextSafeAction as the first remaining not_started task whose dependsOn are all completed."
+  },
+  "escalateIf": [
+    "Completing this task\u0027s Outcome would require an architecture, data-model, or public-contract choice not already recorded in the Solution Blueprint \u2014 stop and ask a human rather than deciding it yourself.",
+    "A required credential, access grant, or environment value is missing.",
+    "The repository\u0027s actual current state no longer matches this task\u0027s pinned baseline (see START_HERE.md\u0027s baseline-drift reconciliation guidance).",
+    "A required human approval workflow or sign-off checkpoint is absent or bypassed."
+  ]
+}

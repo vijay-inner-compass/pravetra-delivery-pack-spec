@@ -1,0 +1,218 @@
+{
+  "specVersion": "1.1.0",
+  "deliveryPackVersion": 2,
+  "pinnedRepositoryLabel": "No existing-system baseline (greenfield)",
+  "extensions": {
+    "pravetra": {
+      "blueprintId": "a3f05f0f256c49d4836120beb3cbc4ec",
+      "blueprintVersion": 2
+    }
+  },
+  "tasks": [
+    {
+      "taskId": "TASK-001",
+      "title": "Scaffold Local Encrypted Database (DataStore)",
+      "status": "NotStarted",
+      "dependsOn": []
+    },
+    {
+      "taskId": "TASK-001.1",
+      "parentTaskId": "TASK-001",
+      "title": "Store all session data",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-001.2",
+      "parentTaskId": "TASK-001",
+      "title": "Encrypt all stored data at rest using AES-256 encryption",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-001.3",
+      "parentTaskId": "TASK-001",
+      "title": "Provide a backup and recovery mechanism that allows users",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-001.4",
+      "parentTaskId": "TASK-001",
+      "title": "Comply with GDPR regulations",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-001.5",
+      "parentTaskId": "TASK-001",
+      "title": "Edit or delete past focus sessions",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-002",
+      "title": "Scaffold Session Tracking (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-002.1",
+      "parentTaskId": "TASK-002",
+      "title": "Accurately track billable hours",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.2",
+      "parentTaskId": "TASK-002",
+      "title": "Start a focus session by selecting a client and entering",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.3",
+      "parentTaskId": "TASK-002",
+      "title": "Prompt the user",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.4",
+      "parentTaskId": "TASK-002",
+      "title": "Timer updates in real-time",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.5",
+      "parentTaskId": "TASK-002",
+      "title": "Start and record focus sessions",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.6",
+      "parentTaskId": "TASK-002",
+      "title": "Manually stop a focus session and record the end time",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.7",
+      "parentTaskId": "TASK-002",
+      "title": "Session data is backed up at least once a week to prevent",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-002.8",
+      "parentTaskId": "TASK-002",
+      "title": "Access historical session data (\u002B1 related Should requirement)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-002"
+      ]
+    },
+    {
+      "taskId": "TASK-003",
+      "title": "Scaffold Timesheet and Export (LogicalModule)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001"
+      ]
+    },
+    {
+      "taskId": "TASK-003.1",
+      "parentTaskId": "TASK-003",
+      "title": "Provide users with a trustworthy weekly timesheet",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-003"
+      ]
+    },
+    {
+      "taskId": "TASK-003.2",
+      "parentTaskId": "TASK-003",
+      "title": "Export timesheet as a CSV or PDF file",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-003"
+      ]
+    },
+    {
+      "taskId": "TASK-004",
+      "title": "Scaffold Desktop Client (ClientApp)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003"
+      ]
+    },
+    {
+      "taskId": "TASK-004.1",
+      "parentTaskId": "TASK-004",
+      "title": "Display a timer in the system tray that counts the duration",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-004.2",
+      "parentTaskId": "TASK-004",
+      "title": "Provide a weekly review screen that totals sessions",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-004.3",
+      "parentTaskId": "TASK-004",
+      "title": "View a history of past focus sessions",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    },
+    {
+      "taskId": "TASK-004.4",
+      "parentTaskId": "TASK-004",
+      "title": "Have a user interface that adheres (\u002B1 related Should requirement)",
+      "status": "NotStarted",
+      "dependsOn": [
+        "TASK-004"
+      ]
+    }
+  ],
+  "nextSafeAction": "Start TASK-001: Scaffold Local Encrypted Database (DataStore)",
+  "reconciliationGuidance": "If the repository\u0027s actual HEAD no longer matches the pinned baseline above, stop, re-run context ingestion (or otherwise confirm current reality) before trusting any task\u0027s currentStateEvidence or targetScope, and record the drift instead of silently proceeding."
+}

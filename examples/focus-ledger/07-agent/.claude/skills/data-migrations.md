@@ -1,0 +1,8 @@
+# Data & Migrations
+
+> Canonical policy version: blueprint-v2-tasks-23-15bea665
+> Generated: 2026-10-09 11:48:57Z
+> Project: E03-focus-ledger
+Complete — 1 data store(s) recorded in the catalog. Governed by AIGuard data lifecycle & protection: dataFoundations: The data entities are client names, task descriptions, session start and end times and notes entered by the user; they are created by the user in the app, are available and clean from the first session, and are owned by the user, with the schema versioned inside the app by migration scripts. Data quality is validated on entry (a session needs a client and a start time, overlapping sessions are fla…; dataLifecycle: The data entities are client names, task descriptions, session start and end times and notes entered by the user; they are created by the user in the app, are available and clean from the first session, and are owned by the user, with the schema versioned inside the app by migration scripts. Data quality is validated on entry (a session needs a client and a start time, overlapping sessions are fla…; dataQualityAndSensitivity: The data entities are client names, task descriptions, session start and end times and notes entered by the user; they are created by the user in the app, are available and clean from the first session, and are owned by the user, with the schema versioned inside the app by migration scripts. Data quality is validated on entry (a session needs a client and a start time, overlapping sessions are fla….
+
+A schema migration is always a new, versioned file — never edit an already-applied migration in place.

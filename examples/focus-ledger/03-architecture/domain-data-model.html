@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Data Model &amp; Entity Dictionary</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Domain Data Model &amp; Entity Dictionary</h1>
+    <p>This document specifies the **Domain Data Model, Entity Boundaries, and Schema Requirements** for **E03-focus-ledger**. It provides the persistence models, aggregate roots, relationships, and data governance rules required for autonomous coding agents implementing **TASK-001 (Primary Database / Persistence)** and component domain services across **Domain-Driven Design (DDD)**, **Scrum Data Modeling**, **SAFe Architecture Enablers**, and **Enterprise Database Engineering**.</p>
+    <h2>1. Architecture &amp; Persistence Context</h2>
+    <table>
+      <tr>
+        <th>Architecture Attribute</th>
+        <th>Specification</th>
+      </tr>
+      <tr>
+        <td>Architecture Style</td>
+        <td>Modular Monolith</td>
+      </tr>
+      <tr>
+        <td>Decomposition Structure</td>
+        <td>ModularMonolith</td>
+      </tr>
+      <tr>
+        <td>Target Schema Version</td>
+        <td>v2</td>
+      </tr>
+    </table>
+    <h3>Decided Persistence Stack</h3>
+    <ul><li>**Technology**: C# on .NET 10 with the Avalonia UI desktop toolkit (rejected alternatives, do not use: WPF (Windows only, so it cannot run on the owner&#39;s Mac); .NET MAUI (no Linux support and weaker desktop support than Avalonia); WinForms (Windows only); A local web page or an Electron shell (not .NET, and a local port is a network surface the no-network promise forbids); Python with a Qt or Tkinter toolkit (rejected: the owner mandates .NET for all three examples)). Rationale: Application language and desktop UI toolkit. The owner mandates .NET. Avalonia UI gives a real native window, a system tray icon and a timer on Windows, macOS and Linux from one codebase, which matches the owner&#39;s Mac and the Windows target; the tray timer requires a tray icon. The app is published as a single-file, self-contained executable per platform (dotnet publish) and tested with xUnit.</li></ul>
+    <ul><li>**Technology**: an embedded SQLite database file, one per user, on the user machine, accessed through Microsoft.Data.Sqlite (rejected alternatives, do not use: plain JSON or CSV files in a user folder (no transactions, so a crash mid-write corrupts the ledger)). Rationale: Database. SQLite is the mandated database. It is a single file with no server process, so the product keeps its local-first, no-server promise and a backup is a file copy.</li></ul>
+    <ul><li>**Technology**: CSV export (rejected alternatives, do not use: PDF export). Rationale: The choice between CSV and PDF export depends on user needs for data presentation. CSV is favored for its simplicity, while PDF is preferred for formal documentation.</li></ul>
+    <h2>2. Component Entity &amp; Schema Specifications</h2>
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Kind</th>
+        <th>Responsibilities</th>
+        <th>Data Design &amp; Entities</th>
+      </tr>
+      <tr>
+        <td>Desktop Client</td>
+        <td>ClientApp</td>
+        <td>• Provide the desktop user interface and its keyboard, window and file-dialog behaviour for the target operating systems. • Run the domain modules in-process on the user&#39;s machine; no network service is involved. • Keep window and view state locally; every durable fact goes through the local data store.</td>
+        <td>Holds transient interface state only; all durable data is read and written through the local data store.</td>
+      </tr>
+      <tr>
+        <td>Local Encrypted Database</td>
+        <td>DataStore</td>
+        <td>• Persist the application&#39;s data in a single local database file on the user&#39;s machine. • Protect the data at rest as the confirmed data decision requires (for example encryption, with the key kept in the operating-system key store). • Support backup and restore of the one file, and versioned local schema upgrades when the application is updated.</td>
+        <td>Embedded relational schema with versioned local upgrades; the file is created on first run and never leaves the user&#39;s machine unless the user exports it.</td>
+      </tr>
+      <tr>
+        <td>Session Tracking</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: Enable independent consultants and freelance developers to accurately track their billable hours, reducing under-billing by at least 4 hours per week, which translates to approximately $15,000 annually per consultant.; Provide users with a trustworthy weekly timesheet that can be generated in under 2 minutes.; The application must allow users to start a focus session by selecting a client and entering a one-line task description.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+      <tr>
+        <td>Timesheet and Export</td>
+        <td>LogicalModule</td>
+        <td>• Implement core domain logic and invariant validation for: Enable independent consultants and freelance developers to accurately track their billable hours, reducing under-billing by at least 4 hours per week, which translates to approximately $15,000 annually per consultant.; Provide users with a trustworthy weekly timesheet that can be generated in under 2 minutes.; The application must allow users to start a focus session by selecting a client and entering a one-line task description.. • Validate command inputs and orchestrate state transitions. • Emit domain notifications and audit events upon state changes.</td>
+        <td>Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</td>
+      </tr>
+    </table>
+    <h2>3. Entity Details &amp; Data Governance Notes</h2>
+    <h3>Desktop Client (ClientApp)</h3>
+    <ul><li>**Domain Responsibilities**: • Provide the desktop user interface and its keyboard, window and file-dialog behaviour for the target operating systems.</li></ul>
+    <p>• Run the domain modules in-process on the user&#39;s machine; no network service is involved.</p>
+    <p>• Keep window and view state locally; every durable fact goes through the local data store.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Holds transient interface state only; all durable data is read and written through the local data store.</li></ul>
+    <ul><li>**API &amp; Query Interface**: No network API. The client calls the domain modules in-process; import and export file formats, if any, are recorded here.</li></ul>
+    <ul><li>**Boundary Rationale**: Dedicated client presentation boundary decoupled from backend application logic to support independent UI updates and client-specific performance optimization.</li></ul>
+    <h3>Local Encrypted Database (DataStore)</h3>
+    <ul><li>**Domain Responsibilities**: • Persist the application&#39;s data in a single local database file on the user&#39;s machine.</li></ul>
+    <p>• Protect the data at rest as the confirmed data decision requires (for example encryption, with the key kept in the operating-system key store).</p>
+    <p>• Support backup and restore of the one file, and versioned local schema upgrades when the application is updated.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Embedded relational schema with versioned local upgrades; the file is created on first run and never leaves the user&#39;s machine unless the user exports it.</li></ul>
+    <ul><li>**API &amp; Query Interface**: Accessed only through the domain modules, in-process, through the embedded database driver; no network access.</li></ul>
+    <ul><li>**Boundary Rationale**: Centralized relational database ensures ACID transaction guarantees and cross-module relational consistency without complex distributed transactions.</li></ul>
+    <h3>Session Tracking (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: Enable independent consultants and freelance developers to accurately track their billable hours, reducing under-billing by at least 4 hours per week, which translates to approximately $15,000 annually per consultant.; Provide users with a trustworthy weekly timesheet that can be generated in under 2 minutes.; The application must allow users to start a focus session by selecting a client and entering a one-line task description..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h3>Timesheet and Export (LogicalModule)</h3>
+    <ul><li>**Domain Responsibilities**: • Implement core domain logic and invariant validation for: Enable independent consultants and freelance developers to accurately track their billable hours, reducing under-billing by at least 4 hours per week, which translates to approximately $15,000 annually per consultant.; Provide users with a trustworthy weekly timesheet that can be generated in under 2 minutes.; The application must allow users to start a focus session by selecting a client and entering a one-line task description..</li></ul>
+    <p>• Validate command inputs and orchestrate state transitions.</p>
+    <p>• Emit domain notifications and audit events upon state changes.</p>
+    <ul><li>**Data Design &amp; Schema Notes**: Owns domain entities and aggregate roots. Enforces relational schema constraints and entity validation.</li></ul>
+    <ul><li>**API &amp; Query Interface**: In-process service contracts and interfaces written in the language of the stack chosen for this project. Typed request/response models, explicit success-or-failure results, and cancellation or timeout support where the chosen language offers it.</li></ul>
+    <ul><li>**Boundary Rationale**: Logical module boundary encapsulates bounded domain invariants and prevents leaky abstractions without premature network serialization overhead.</li></ul>
+    <h2>4. Coding Agent Implementation Rules for TASK-001 (Database &amp; Persistence)</h2>
+    <p>When implementing database schema, migrations, and entities:</p>
+    <p>1. **Strict Boundary Conformance**: Implement only the tables, aggregates, and fields required by the domain specifications above and referenced requirements. Do not invent unapproved tables or bypass entity ownership boundaries.</p>
+    <p>2. **Auditability &amp; Temporal Tracking**: Every primary persistence entity must include audit tracking fields (`CreatedAt`, `UpdatedAt`) and strong unique identifier keys (e.g. UUID/GUID or identity keys).</p>
+    <p>3. **Referential Integrity &amp; Cascades**: Foreign keys must have explicit delete behaviors (avoid inadvertent cascading deletions on primary aggregates; use soft deletes or fail-closed foreign key checks where appropriate).</p>
+    <p>4. **Zero-Migration Loss**: Migrations must be additive, forward-compatible, and idempotent. Never mutate applied migrations in place.</p>
+    <p>5. **Data Protection &amp; Classification**: Ensure restricted data, credentials, and PII are marked for encryption at rest and never logged in plain text.</p>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>

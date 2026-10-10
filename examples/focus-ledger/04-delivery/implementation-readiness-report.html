@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementation Readiness Report</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #243248;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --table-header: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface-card: #f1f5f9;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #0284c7;
+        --table-header: #e2e8f0;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--text);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--table-header);
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .diagram-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: var(--surface);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose'
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">    <h1>Implementation Readiness Report</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Project / Pipeline</td>
+        <td>E03-focus-ledger</td>
+      </tr>
+      <tr>
+        <td>Artifact version</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Generated</td>
+        <td>2026-10-09 11:34:13Z</td>
+      </tr>
+      <tr>
+        <td>Document status</td>
+        <td>Current at generation time</td>
+      </tr>
+      <tr>
+        <td>Classification</td>
+        <td>Internal project delivery artifact</td>
+      </tr>
+      <tr>
+        <td>Review posture</td>
+        <td>Draft until reviewed and accepted by accountable project roles</td>
+      </tr>
+    </table>
+    <p>&gt; This artifact is generated from captured Pravetra project data. Empty sections are intentionally marked instead of inferred.</p>
+    <p>---</p>
+    <h2>1. Executive Summary</h2>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Requirements (critical approved / total)</td>
+        <td>16 / 21</td>
+      </tr>
+      <tr>
+        <td>Technology decisions (decided / total)</td>
+        <td>3 / 3</td>
+      </tr>
+      <tr>
+        <td>Open critical risks</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>Gate 4 checklist (satisfied / total)</td>
+        <td>28 / 29</td>
+      </tr>
+      <tr>
+        <td>Implementation ready</td>
+        <td>No</td>
+      </tr>
+    </table>
+    <h2>2. Gate 3 Readiness Checklist</h2>
+    <table>
+      <tr>
+        <th>Element</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>Gate 2 decision recorded</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no technology proposal is left unreviewed</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no Must requirement holds an unconfirmed (proposed) figure</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no unresolved material-change trigger</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>critical requirements approved</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decisions have alternatives and rationale</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>security/data/AI fields complete</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decision recorded when software is required</td>
+        <td>Satisfied</td>
+      </tr>
+    </table>
+    <h2>3. Gate 3 Decision Record</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Outcome</td>
+        <td>Approved</td>
+      </tr>
+      <tr>
+        <td>Approved by</td>
+        <td>approver@example.com</td>
+      </tr>
+      <tr>
+        <td>Recorded</td>
+        <td>2026-10-09 11:33:54Z</td>
+      </tr>
+      <tr>
+        <td>Rationale</td>
+        <td>Gate 3 approved for focus-ledger on the owner&#39;s explicit instruction: a .NET Avalonia desktop app with an encrypted local SQLite file and no server. All 15 Must requirements are approved, and the three technology decisions (Avalonia, SQLite, CSV export) are decided with accepted ADRs.</td>
+      </tr>
+    </table>
+    <h2>4. Gate 4 Readiness Checklist</h2>
+    <table>
+      <tr>
+        <th>Element</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>no unresolved material-change trigger since Gate 3</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no technology proposal is left unreviewed</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decisions have alternatives and rationale</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>AI architecture considerations complete for the current governance tier</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>approved blueprint and implementation-ready delivery pack exist</td>
+        <td>Not satisfied</td>
+      </tr>
+      <tr>
+        <td>critical requirements approved</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>critical requirements have acceptance criteria</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>ADRs approved</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no open governance blockers</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>security fields complete</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>architecture drivers have decided technology decisions</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no unresolved dependencies</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>risks mitigated or accepted</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>traceability &gt;= 95%</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>technology decision recorded when software is required</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>work-type override provenance recorded</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>change requests reference an approved baseline</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>blueprints built from a baseline reference an approved snapshot</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>analyzed change requests classify backward compatibility</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>approved blueprints have an approved decomposition</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>approved blueprints have no blocking concerns or unresolved delivery-policy questions</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>no pending technology-suitability approvals on approved blueprints</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>implementation-ready delivery packs carry no validation issues</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>implementation-ready tasks are structurally complete</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>commercial section only attached by a real economics calculation</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>latest economics assessment references the current delivery pack</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>latest economics assessment references the current blueprint</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>confirmed economic assumptions cite a source</td>
+        <td>Satisfied</td>
+      </tr>
+      <tr>
+        <td>Warning: 9 blueprint concern(s) are still unconfirmed templates (TechnologyLanguageSelection, DomainDesign, SecurityPrivacy, QualityAttributes, Ux, Testing, Observability, DeliveryWorkflow, CostCapacity); confirm or edit them in ForgeFlow</td>
+        <td>Satisfied</td>
+      </tr>
+    </table>
+    <h2>5. Gate 4 Decision Record</h2>
+    <p>_No decision recorded yet._</p>
+    <h2>6. Release Readiness Guidance</h2>
+    <ul><li>Treat unresolved checklist items as blockers for formal release readiness.</li></ul>
+    <ul><li>Regenerate after requirements, technology decisions, or critical risks change.</li></ul>
+    <footer class="footer">
+      Generated by Pravetra Delivery Pack Automation Platform
+    </footer>
+  </div>
+</body>
+</html>
